@@ -17,239 +17,7 @@
     />
 
     <link rel="stylesheet" href="css/brand.css" />
-
-    <style>
-      .nav-link:hover,
-      .bi-person:hover {
-        color: white !important;
-      }
-
-      input::placeholder {
-        color: var(--text-tertiary) !important;
-      }
-
-      input[type="search"]::-webkit-search-cancel-button {
-        -webkit-appearance: none;
-        display: none;
-      }
-
-      .navbar-toggler,
-      input {
-        outline: none !important;
-        box-shadow: none !important;
-      }
-
-      .trending-section {
-        max-width: 1200px;
-        width: 100%;
-      }
-
-      .container-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 24px;
-      }
-
-      .container-header h2 {
-        font-size: 1.75rem;
-        font-weight: 600;
-        color: #f8fafc;
-      }
-
-      .slider-nav .slider-arrow {
-        background-color: #334155;
-        border: none;
-        color: #cbd5e1;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-left: 8px;
-        font-size: 1.25rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-
-      .slider-nav .slider-arrow:hover {
-        background-color: #475569;
-        color: #f8fafc;
-      }
-
-      .slider-wrapper {
-        overflow-x: hidden;
-        position: relative;
-      }
-
-      .slider-container {
-        display: flex;
-        gap: 20px;
-        padding-bottom: 10px;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-
-      .slider-container::-webkit-scrollbar {
-        display: none;
-      }
-
-      .movie-card,
-      .series-card {
-        flex: 0 0 calc(20% - 16px);
-        background-color: var(--bg-secondary);
-        border-radius: 12px;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-      }
-
-      .card-image-container {
-        position: relative;
-      }
-
-      .image-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to top, rgba(50, 0, 89, 0.8), transparent);
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        padding-bottom: 20px;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-      }
-
-      .overlay-btn {
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #fff;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        font-size: 1.4rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 8px;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        transform: translateY(20px);
-      }
-
-      .overlay-btn:hover {
-        background: rgba(255, 255, 255, 0.3);
-      }
-
-      .movie-card:hover .image-overlay,
-      .series-card:hover .image-overlay {
-        opacity: 1;
-      }
-
-      .movie-card:hover .overlay-btn,
-      .series-card:hover .overlay-btn {
-        transform: translateY(0);
-      }
-
-      .movie-card:hover .overlay-btn:nth-child(1),
-      .series-card:hover .overlay-btn:nth-child(1) {
-        transition-delay: 0.1s;
-      }
-      .movie-card:hover .overlay-btn:nth-child(2),
-      .series-card:hover .overlay-btn:nth-child(2) {
-        transition-delay: 0.2s;
-      }
-
-      .card-img-top {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-      }
-
-      .card-body {
-        padding: 16px;
-      }
-
-      .card-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: #f8fafc;
-        margin-bottom: 8px;
-        white-space: nowrap;
-      }
-
-      .card-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.875rem;
-        color: #94a3b8;
-        margin-bottom: 8px;
-      }
-
-      .card-meta:last-child {
-        margin-bottom: 0;
-      }
-
-      .card-meta .rating i {
-        color: var(--gold);
-        margin-right: 4px;
-      }
-
-      .card-meta .price {
-        font-weight: 600;
-        color: #e2e8f0;
-      }
-
-      .card-meta i {
-        margin-right: 6px;
-      }
-
-      @media (max-width: 1200px) {
-        .movie-card {
-          flex: 0 0 calc(25% - 15px);
-        }
-        .series-card {
-          flex: 0 0 calc(25% - 15px);
-        }
-      }
-      @media (max-width: 992px) {
-        .movie-card {
-          flex: 0 0 calc(33.33% - 14px);
-        }
-        .series-card {
-          flex: 0 0 calc(33.33% - 14px);
-        }
-      }
-      @media (max-width: 768px) {
-        .movie-card {
-          flex: 0 0 calc(50% - 10px);
-        }
-        .series-card {
-          flex: 0 0 calc(50% - 10px);
-        }
-        .container-header h2 {
-          font-size: 1.5rem;
-        }
-      }
-      @media (max-width: 576px) {
-        .movie-card {
-          flex: 0 0 80%;
-        }
-        .series-card {
-          flex: 0 0 80%;
-        }
-        .trending-section {
-          padding: 16px;
-        }
-      }
-
-      #standard-btn:hover {
-        background: var(--gradient-brand-secondary) !important;
-      }
-    </style>
+    <link rel="stylesheet" href="css/index.css" />
   </head>
 
   <body style="background-color: var(--bg-primary)">
@@ -892,6 +660,7 @@
     </div>
 
     <!-- Pricing -->
+     <div style="background-color: var(--bg-secondary);" class="mt-5">
     <div style="width: 80%" class="container py-5 text-center text-white">
       <h2 class="fw-bold mb-2">Choose Your Plan</h2>
       <p class="text-secondary mb-4">
@@ -914,7 +683,7 @@
         <!-- Basic Plan -->
         <div class="col-md-4 mb-4">
           <div
-            style="background-color: var(--bg-secondary)"
+            style="background-color: var(--bg-primary)"
             class="card text-white h-100"
           >
             <div class="card-body d-flex flex-column justify-content-between">
@@ -922,7 +691,7 @@
                 <h5 class="card-title fw-bold">Basic</h5>
                 <div class="d-flex justify-content-center align-items-baseline">
                   <div>
-                    <h2 id="price-basic" class="fw-bold">510 Tk</h2>
+                    <h2 id="price-basic" class="fw-bold">280 Tk</h2>
                   </div>
                   <div>
                     <h2
@@ -951,7 +720,7 @@
         <div class="col-md-4 mb-4">
           <div
             style="
-              background-color: var(--bg-secondary);
+              background-color: var(--bg-primary);
               border-color: var(--brand-purple);
             "
             class="card border-2 text-white h-100"
@@ -968,7 +737,7 @@
                 <h5 class="card-title fw-bold mt-2">Standard</h5>
                 <div class="d-flex justify-content-center align-items-baseline">
                   <div>
-                    <h2 id="price-standard" class="fw-bold">510 Tk</h2>
+                    <h2 id="price-standard" class="fw-bold">340 Tk</h2>
                   </div>
                   <div>
                     <h2
@@ -1003,7 +772,7 @@
         <!-- Premium Plan -->
         <div class="col-md-4 mb-4">
           <div
-            style="background-color: var(--bg-secondary)"
+            style="background-color: var(--bg-primary)"
             class="card text-white h-100"
           >
             <div class="card-body">
@@ -1041,83 +810,89 @@
       </p>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const slider = document.getElementById("slider");
-        const prevButton = document.getElementById("prev-slide");
-        const nextButton = document.getElementById("next-slide");
+    </div>
 
-        const getCardWidth = () => {
-          const firstCard = slider.querySelector(".movie-card");
-          if (!firstCard) return 0;
-          const cardStyle = window.getComputedStyle(firstCard);
-          const cardMarginRight = parseInt(cardStyle.marginRight) || 20;
-          return firstCard.offsetWidth + cardMarginRight;
-        };
+    <!-- Footer -->
+    <footer style="background-color: var(--bg-primary); color: var(--text-tertiary);" class="pt-5 pb-3">
+      <div class="container">
+        <div class="row text-start">
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold text-white">
+              Stream<span style="color: var(--brand-purple)">Flex</span>
+            </h5>
+            <p class="text-secondary mb-0">
+              Your ultimate destination for movies and series streaming.
+            </p>
+          </div>
+          <div class="col-md-2 mb-4">
+            <h6 class="fw-semibold text-white">Company</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a style="color: var(--text-tertiary);" href="#" class="text-decoration-none"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a style="color: var(--text-tertiary);" href="#" class="text-decoration-none"
+                  >Movies</a
+                >
+              </li>
+              <li>
+                <a style="color: var(--text-tertiary);" href="#" class="text-decoration-none"
+                  >Series</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h6 class="fw-semibold text-white">Support</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a style="color: var(--text-tertiary);" href="#" class="text-decoration-none"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a style="color: var(--text-tertiary);" href="#" class="text-decoration-none"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a style="color: var(--text-tertiary);" href="#" class="text-decoration-none"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h6 class="fw-semibold text-white">Follow Us</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a style="color: var(--text-tertiary);" href="#" class="text-decoration-none"
+                  >Facebook</a
+                >
+              </li>
+              <li>
+                <a style="color: var(--text-tertiary);" href="#" class="text-decoration-none"
+                  >Twitter</a
+                >
+              </li>
+              <li>
+                <a style="color: var(--text-tertiary);" href="#" class="text-decoration-none"
+                  >Instagram</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr class="border-secondary" />
+        <div class="text-center text-secondary small">
+          © 2024 StreamFlex. All rights reserved.
+        </div>
+      </div>
+    </footer>
 
-        nextButton.addEventListener("click", () => {
-          const cardWidth = getCardWidth();
-          slider.scrollBy({ left: cardWidth, behavior: "smooth" });
-        });
-
-        prevButton.addEventListener("click", () => {
-          const cardWidth = getCardWidth();
-          slider.scrollBy({ left: -cardWidth, behavior: "smooth" });
-        });
-      });
-
-      // For series
-      document.addEventListener("DOMContentLoaded", function () {
-        const slider = document.getElementById("slider2");
-        const prevButton = document.getElementById("prev-slide2");
-        const nextButton = document.getElementById("next-slide2");
-
-        const getCardWidth = () => {
-          const firstCard = slider.querySelector(".series-card");
-          if (!firstCard) return 0;
-          const cardStyle = window.getComputedStyle(firstCard);
-          const cardMarginRight = parseInt(cardStyle.marginRight) || 20;
-          return firstCard.offsetWidth + cardMarginRight;
-        };
-
-        nextButton.addEventListener("click", () => {
-          const cardWidth = getCardWidth();
-          slider.scrollBy({ left: cardWidth, behavior: "smooth" });
-        });
-
-        prevButton.addEventListener("click", () => {
-          const cardWidth = getCardWidth();
-          slider.scrollBy({ left: -cardWidth, behavior: "smooth" });
-        });
-      });
-
-      //For billing toggle button
-      const billingToggle = document.getElementById("billingToggle");
-      billingToggle.addEventListener("click", () => {
-        const price_basic = document.getElementById("price-basic");
-        const price_standard = document.getElementById("price-standard");
-        const price_premium = document.getElementById("price-premium");
-        const priceText = document.querySelectorAll(".price-text");
-        if (billingToggle.checked) {
-          price_basic.innerHTML = "2680 Tk";
-          price_standard.innerHTML = "3200 Tk";
-          price_premium.innerHTML = "4800 Tk";
-
-          priceText.forEach((e) => {
-            e.innerHTML = "/year";
-          });
-        } else {
-          price_basic.innerHTML = "280 Tk";
-          price_standard.innerHTML = "340 Tk";
-          price_premium.innerHTML = "510 Tk";
-
-          priceText.forEach((e) => {
-            e.innerHTML = "/month";
-          });
-        }
-      });
-    </script>
-
+    <script src="js/index.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
