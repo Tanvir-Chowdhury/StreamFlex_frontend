@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamFlex - Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/brand.css" />
+
+    <style>
+      .nav-link:hover,
+      .bi-person:hover {
+        color: white !important;
+      }
+
+      input::placeholder {
+        color: var(--text-tertiary) !important;
+      }
+
+      input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        display: none;
+      }
+
+      .navbar-toggler,
+      input {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+
+      .trending-section {
+        max-width: 1200px;
+        width: 100%;
+      }
+
+      .container-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .container-header h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #f8fafc;
+      }
+
+      .slider-nav .slider-arrow {
+        background-color: #334155;
+        border: none;
+        color: #cbd5e1;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-left: 8px;
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .slider-nav .slider-arrow:hover {
+        background-color: #475569;
+        color: #f8fafc;
+      }
+
+      .slider-wrapper {
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .slider-container {
+        display: flex;
+        gap: 20px;
+        padding-bottom: 10px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .slider-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .movie-card, .series-card {
+        flex: 0 0 calc(20% - 16px);
+        background-color: var(--bg-secondary);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .card-image-container {
+        position: relative;
+      }
+
+      .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(50, 0, 89, 0.8), transparent);
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 20px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .overlay-btn {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        font-size: 1.4rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        transform: translateY(20px);
+      }
+
+      .overlay-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .movie-card:hover .image-overlay, .series-card:hover .image-overlay {
+        opacity: 1;
+      }
+
+      .movie-card:hover .overlay-btn, .series-card:hover .overlay-btn {
+        transform: translateY(0);
+      }
+
+      .movie-card:hover .overlay-btn:nth-child(1), .series-card:hover .overlay-btn:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+      .movie-card:hover .overlay-btn:nth-child(2), .series-card:hover .overlay-btn:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+
+      .card-img-top {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .card-body {
+        padding: 16px;
+      }
+
+      .card-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 8px;
+        white-space: nowrap;
+      }
+
+      .card-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.875rem;
+        color: #94a3b8;
+        margin-bottom: 8px;
+      }
+
+      .card-meta:last-child {
+        margin-bottom: 0;
+      }
+
+      .card-meta .rating i {
+        color: var(--gold);
+        margin-right: 4px;
+      }
+
+      .card-meta .price {
+        font-weight: 600;
+        color: #e2e8f0;
+      }
+
+      .card-meta i {
+        margin-right: 6px;
+      }
+
+      @media (max-width: 1200px) {
+        .movie-card {
+          flex: 0 0 calc(25% - 15px);
+        }
+        .series-card {
+          flex: 0 0 calc(25% - 15px);
+        }
+      }
+      @media (max-width: 992px) {
+        .movie-card {
+          flex: 0 0 calc(33.33% - 14px);
+        }
+        .series-card {
+          flex: 0 0 calc(33.33% - 14px);
+        }
+      }
+      @media (max-width: 768px) {
+        .movie-card {
+          flex: 0 0 calc(50% - 10px);
+        }
+        .series-card {
+          flex: 0 0 calc(50% - 10px);
+        }
+        .container-header h2 {
+          font-size: 1.5rem;
+        }
+      }
+      @media (max-width: 576px) {
+        .movie-card {
+          flex: 0 0 80%;
+        }
+        .series-card {
+          flex: 0 0 80%;
+        }
+        .trending-section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body style="background-color: var(--bg-primary)">
+    <nav
+      style="background-color: var(--bg-primary)"
+      class="navbar navbar-expand-lg fixed-top py-2 px-4"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-white" href="index.html">
+          Stream<span style="color: var(--brand-purple)">Flex</span>
+        </a>
+
+        <!-- mobile menu -->
+        <button
+          class="navbar-toggler navbar-dark text-white border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarlinks"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- links -->
+        <div class="collapse navbar-collapse" id="navbarlinks">
+          <ul class="navbar-nav me-auto ms-3">
+            <li class="nav-item">
+              <a class="nav-link active text-white font-weight-bold" href="#"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a style="color: var(--text-tertiary)" class="nav-link" href="#"
+                >Movies</a
+              >
+            </li>
+            <li class="nav-item">
+              <a style="color: var(--text-tertiary)" class="nav-link" href="#"
+                >Series</a
+              >
+            </li>
+            <li class="nav-item">
+              <a style="color: var(--text-tertiary)" class="nav-link" href="#"
+                >Categories</a
+              >
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center">
+            <!-- Search Input -->
+            <form
+              style="background-color: var(--bg-tertiary)"
+              class="d-flex align-items-center px-3 rounded-pill"
+              style="min-width: 250px"
+            >
+              <i
+                style="color: var(--text-tertiary)"
+                class="bi bi-search me-2"
+              ></i>
+              <input
+                class="form-control border-0 bg-transparent text-white"
+                type="search"
+                placeholder="Search movies, series..."
+                aria-label="Search"
+              />
+            </form>
+
+            <!-- User Icon -->
+            <div class="ms-3">
+              <i
+                style="color: var(--text-tertiary)"
+                class="bi bi-person fs-5"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="position-relative min-vh-100 h-auto py-5 d-flex align-items-center text-white overflow-hidden"
+    >
+      <!-- Background Image -->
+      <div
+        class="position-absolute top-0 start-0 w-100 h-100 bg-dark"
+        style="
+          background: url('images/hero_bg2.jpg') no-repeat center center;
+          background-size: cover;
+          z-index: 1;
+        "
+      ></div>
+
+      <!-- Gradient Overlay -->
+      <div
+        class="position-absolute top-0 start-0 w-100 h-100"
+        style="background: var(--gradient-hero); z-index: 2"
+      ></div>
+
+      <!-- Content -->
+      <div class="container position-relative z-3">
+        <div class="col-md-8">
+          <h1 class="display-3 fw-bold mb-4">Jurassic World: Fallen Kingdom</h1>
+          <p class="lead text-light mb-4">
+            When the island's dormant volcano begins roaring to life, Owen and
+            Claire mount a campaign to rescue the remaining dinosaurs from this
+            extinction-level event.
+          </p>
+
+          <div class="d-flex gap-4 text-light mb-4">
+            <div class="d-flex align-items-center gap-2">
+              <i style="color: var(--gold)" class="bi bi-star-fill"></i>
+              <span class="fw-semibold">6.1</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-clock"></i>
+              <span>2h 9m</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-calendar3"></i>
+              <span>2018</span>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3">
+            <a
+              href="#"
+              class="btn btn-light text-dark fw-semibold px-4 py-2 d-flex align-items-center gap-2"
+            >
+              <i class="bi bi-play-fill"></i> Play Now
+            </a>
+            <a
+              href="#"
+              class="btn btn-secondary bg-opacity-75 text-white fw-semibold px-4 py-2 d-flex align-items-center gap-2"
+            >
+              <i class="bi bi-info-circle"></i> More Info
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending Movies -->
+    <div style="width: 80%" class="container-fluid mt-5">
+      <div class="container-header">
+        <h2 class="fw-bold">Trending Movies</h2>
+        <div class="slider-nav">
+          <button class="slider-arrow" id="prev-slide">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button class="slider-arrow" id="next-slide">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="slider-wrapper">
+        <div class="slider-container" id="slider">
+          <div class="movie-card">
+            <div class="card-image-container">
+              <img src="images/avatar.jpg" alt="Avatar" class="card-img-top" />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Avatar</h3>
+              <div class="card-meta">
+                <span>Action</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>8.7</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>1h 58m</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >$4.99</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="card-image-container">
+              <img
+                src="images/blackphones2.jpg"
+                alt="Black Phone 2"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Black Phone 2</h3>
+              <div class="card-meta">
+                <span>Drama</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>7.8</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>2h 17m</span>
+                <span class="price">$3.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="card-image-container">
+              <img
+                src="images/bulletTrain.jpg"
+                alt="Bullet Train"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Bullet Train</h3>
+              <div class="card-meta">
+                <span>Thriller</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>8.2</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>1h 45m</span>
+                <span class="price">$4.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="card-image-container">
+              <img
+                src="images/civilwar.jpg"
+                alt="Civil War"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Civil War</h3>
+              <div class="card-meta">
+                <span>Adventure</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>7.6</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>2h 5m</span>
+                <span class="price">$3.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="card-image-container">
+              <img
+                src="images/kingsman.jpg"
+                alt="The Kings Man"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">The Kings Man</h3>
+              <div class="card-meta">
+                <span>Romance</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>8.1</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>1h 57m</span>
+                <span class="price">$4.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="card-image-container">
+              <img src="images/matrix.jpg" alt="Matrix" class="card-img-top" />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Matrix</h3>
+              <div class="card-meta">
+                <span>Crime</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>8.9</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>2h 30m</span>
+                <span class="price">$5.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="card-image-container">
+              <img
+                src="images/titanic.jpg"
+                alt="Titanic"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Titanic</h3>
+              <div class="card-meta">
+                <span>Sci-Fi</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>9.1</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>2h 10m</span>
+                <span class="price">$5.99</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trending Series -->
+    <div style="width: 80%" class="container-fluid mt-5">
+      <div class="container-header">
+        <h2 class="fw-bold">Trending Series</h2>
+        <div class="slider-nav">
+          <button class="slider-arrow" id="prev-slide2">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button class="slider-arrow" id="next-slide2">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="slider-wrapper">
+        <div class="slider-container" id="slider2">
+          <div class="series-card">
+            <div class="card-image-container">
+              <img src="images/avatar.jpg" alt="Avatar" class="card-img-top" />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Avatar</h3>
+              <div class="card-meta">
+                <span>Action</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>8.7</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>1h 58m</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >$4.99</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="series-card">
+            <div class="card-image-container">
+              <img
+                src="images/blackphones2.jpg"
+                alt="Black Phone 2"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Black Phone 2</h3>
+              <div class="card-meta">
+                <span>Drama</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>7.8</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>2h 17m</span>
+                <span class="price">$3.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="series-card">
+            <div class="card-image-container">
+              <img
+                src="images/bulletTrain.jpg"
+                alt="Bullet Train"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Bullet Train</h3>
+              <div class="card-meta">
+                <span>Thriller</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>8.2</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>1h 45m</span>
+                <span class="price">$4.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="series-card">
+            <div class="card-image-container">
+              <img
+                src="images/civilwar.jpg"
+                alt="Civil War"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Civil War</h3>
+              <div class="card-meta">
+                <span>Adventure</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>7.6</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>2h 5m</span>
+                <span class="price">$3.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="series-card">
+            <div class="card-image-container">
+              <img
+                src="images/kingsman.jpg"
+                alt="The Kings Man"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">The Kings Man</h3>
+              <div class="card-meta">
+                <span>Romance</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>8.1</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>1h 57m</span>
+                <span class="price">$4.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="series-card">
+            <div class="card-image-container">
+              <img src="images/matrix.jpg" alt="Matrix" class="card-img-top" />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Matrix</h3>
+              <div class="card-meta">
+                <span>Crime</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>8.9</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>2h 30m</span>
+                <span class="price">$5.99</span>
+              </div>
+            </div>
+          </div>
+          <div class="series-card">
+            <div class="card-image-container">
+              <img
+                src="images/titanic.jpg"
+                alt="Titanic"
+                class="card-img-top"
+              />
+
+              <div class="image-overlay">
+                <div class="overlay-buttons d-flex">
+                  <button class="overlay-btn">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </button>
+                  <button class="overlay-btn">
+                    <i class="bi bi-bookmark-plus-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Titanic</h3>
+              <div class="card-meta">
+                <span>Sci-Fi</span>
+                <span class="rating"><i class="bi bi-star-fill"></i>9.1</span>
+              </div>
+              <div class="card-meta">
+                <span><i class="bi bi-clock"></i>2h 10m</span>
+                <span class="price">$5.99</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const slider = document.getElementById("slider");
+        const prevButton = document.getElementById("prev-slide");
+        const nextButton = document.getElementById("next-slide");
+
+        const getCardWidth = () => {
+          const firstCard = slider.querySelector(".movie-card");
+          if (!firstCard) return 0;
+          const cardStyle = window.getComputedStyle(firstCard);
+          const cardMarginRight = parseInt(cardStyle.marginRight) || 20; 
+          return firstCard.offsetWidth + cardMarginRight;
+        };
+
+        nextButton.addEventListener("click", () => {
+          const cardWidth = getCardWidth();
+          slider.scrollBy({ left: cardWidth, behavior: "smooth" });
+        });
+
+        prevButton.addEventListener("click", () => {
+          const cardWidth = getCardWidth();
+          slider.scrollBy({ left: -cardWidth, behavior: "smooth" });
+        });
+      });
+
+      // For series
+      document.addEventListener("DOMContentLoaded", function () {
+        const slider = document.getElementById("slider2");
+        const prevButton = document.getElementById("prev-slide2");
+        const nextButton = document.getElementById("next-slide2");
+
+        const getCardWidth = () => {
+          const firstCard = slider.querySelector(".series-card");
+          if (!firstCard) return 0;
+          const cardStyle = window.getComputedStyle(firstCard);
+          const cardMarginRight = parseInt(cardStyle.marginRight) || 20; 
+          return firstCard.offsetWidth + cardMarginRight;
+        };
+
+        nextButton.addEventListener("click", () => {
+          const cardWidth = getCardWidth();
+          slider.scrollBy({ left: cardWidth, behavior: "smooth" });
+        });
+
+        prevButton.addEventListener("click", () => {
+          const cardWidth = getCardWidth();
+          slider.scrollBy({ left: -cardWidth, behavior: "smooth" });
+        });
+      });
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
