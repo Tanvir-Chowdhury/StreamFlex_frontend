@@ -94,7 +94,8 @@
         display: none;
       }
 
-      .movie-card, .series-card {
+      .movie-card,
+      .series-card {
         flex: 0 0 calc(20% - 16px);
         background-color: var(--bg-secondary);
         border-radius: 12px;
@@ -142,18 +143,22 @@
         background: rgba(255, 255, 255, 0.3);
       }
 
-      .movie-card:hover .image-overlay, .series-card:hover .image-overlay {
+      .movie-card:hover .image-overlay,
+      .series-card:hover .image-overlay {
         opacity: 1;
       }
 
-      .movie-card:hover .overlay-btn, .series-card:hover .overlay-btn {
+      .movie-card:hover .overlay-btn,
+      .series-card:hover .overlay-btn {
         transform: translateY(0);
       }
 
-      .movie-card:hover .overlay-btn:nth-child(1), .series-card:hover .overlay-btn:nth-child(1) {
+      .movie-card:hover .overlay-btn:nth-child(1),
+      .series-card:hover .overlay-btn:nth-child(1) {
         transition-delay: 0.1s;
       }
-      .movie-card:hover .overlay-btn:nth-child(2), .series-card:hover .overlay-btn:nth-child(2) {
+      .movie-card:hover .overlay-btn:nth-child(2),
+      .series-card:hover .overlay-btn:nth-child(2) {
         transition-delay: 0.2s;
       }
 
@@ -240,15 +245,19 @@
           padding: 16px;
         }
       }
+
+      #standard-btn:hover {
+        background: var(--gradient-brand-secondary) !important;
+      }
     </style>
   </head>
 
   <body style="background-color: var(--bg-primary)">
     <nav
       style="background-color: var(--bg-primary)"
-      class="navbar navbar-expand-lg fixed-top py-2 px-4"
+      class="navbar navbar-expand-lg fixed-top py-2"
     >
-      <div class="container-fluid">
+      <div style="width: 80%" class="container-fluid">
         <a class="navbar-brand fw-bold text-white" href="index.html">
           Stream<span style="color: var(--brand-purple)">Flex</span>
         </a>
@@ -340,7 +349,7 @@
       ></div>
 
       <!-- Content -->
-      <div class="container position-relative z-3">
+      <div style="width: 80%" class="container position-relative z-3">
         <div class="col-md-8">
           <h1 class="display-3 fw-bold mb-4">Jurassic World: Fallen Kingdom</h1>
           <p class="lead text-light mb-4">
@@ -423,7 +432,7 @@
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>1h 58m</span>
                 <span style="color: var(--brand-purple)" class="price"
-                  >$4.99</span
+                  >50 Tk</span
                 >
               </div>
             </div>
@@ -456,7 +465,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>2h 17m</span>
-                <span class="price">$3.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >30 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -488,7 +499,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>1h 45m</span>
-                <span class="price">$4.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >50 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -520,7 +533,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>2h 5m</span>
-                <span class="price">$3.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >40 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -552,7 +567,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>1h 57m</span>
-                <span class="price">$4.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >20 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -580,7 +597,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>2h 30m</span>
-                <span class="price">$5.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >50 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -612,7 +631,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>2h 10m</span>
-                <span class="price">$5.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >55 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -661,7 +682,7 @@
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>1h 58m</span>
                 <span style="color: var(--brand-purple)" class="price"
-                  >$4.99</span
+                  >50 Tk</span
                 >
               </div>
             </div>
@@ -694,7 +715,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>2h 17m</span>
-                <span class="price">$3.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >40 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -726,7 +749,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>1h 45m</span>
-                <span class="price">$4.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >50 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -758,7 +783,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>2h 5m</span>
-                <span class="price">$3.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >30 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -790,7 +817,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>1h 57m</span>
-                <span class="price">$4.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >30 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -818,7 +847,9 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>2h 30m</span>
-                <span class="price">$5.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >55 Tk</span
+                >
               </div>
             </div>
           </div>
@@ -850,12 +881,164 @@
               </div>
               <div class="card-meta">
                 <span><i class="bi bi-clock"></i>2h 10m</span>
-                <span class="price">$5.99</span>
+                <span style="color: var(--brand-purple)" class="price"
+                  >60 Tk</span
+                >
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Pricing -->
+    <div style="width: 80%" class="container py-5 text-center text-white">
+      <h2 class="fw-bold mb-2">Choose Your Plan</h2>
+      <p class="text-secondary mb-4">
+        Unlimited movies and series, cancel anytime
+      </p>
+
+      <!-- Toggle -->
+      <div class="d-flex justify-content-center align-items-center mb-5">
+        <span class="me-2">Monthly</span>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="billingToggle" />
+        </div>
+        <span style="color: var(--success)" class="ms-2"
+          >Yearly <small>(Save 20%)</small></span
+        >
+      </div>
+
+      <!-- Cards -->
+      <div class="row justify-content-center">
+        <!-- Basic Plan -->
+        <div class="col-md-4 mb-4">
+          <div
+            style="background-color: var(--bg-secondary)"
+            class="card text-white h-100"
+          >
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="card-title fw-bold">Basic</h5>
+                <div class="d-flex justify-content-center align-items-baseline">
+                  <div>
+                    <h2 id="price-basic" class="fw-bold">510 Tk</h2>
+                  </div>
+                  <div>
+                    <h2
+                      style="color: var(--text-tertiary)"
+                      class="price-text fs-6"
+                    >
+                      /month
+                    </h2>
+                  </div>
+                </div>
+                <ul class="list mt-3 mb-4 text-start">
+                  <li>HD Quality</li>
+                  <li>2 Devices</li>
+                  <li>Limited Selection</li>
+                  <li>Mobile & Tablet</li>
+                </ul>
+              </div>
+              <div>
+                <a href="#" class="btn btn-secondary w-100">Get Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standard Plan -->
+        <div class="col-md-4 mb-4">
+          <div
+            style="
+              background-color: var(--bg-secondary);
+              border-color: var(--brand-purple);
+            "
+            class="card border-2 text-white h-100"
+          >
+            <div
+              class="card-body position-relative d-flex flex-column justify-content-between"
+            >
+              <div>
+                <span
+                  style="background: var(--gradient-brand-primary)"
+                  class="badge position-absolute top-0 start-50 translate-middle rounded-pill"
+                  >Most Popular</span
+                >
+                <h5 class="card-title fw-bold mt-2">Standard</h5>
+                <div class="d-flex justify-content-center align-items-baseline">
+                  <div>
+                    <h2 id="price-standard" class="fw-bold">510 Tk</h2>
+                  </div>
+                  <div>
+                    <h2
+                      style="color: var(--text-tertiary)"
+                      class="price-text fs-6"
+                    >
+                      /month
+                    </h2>
+                  </div>
+                </div>
+                <ul class="list mt-3 mb-4 text-start">
+                  <li>Full HD Quality</li>
+                  <li>4 Devices</li>
+                  <li>Full Library</li>
+                  <li>All Devices</li>
+                  <li>Download Offline</li>
+                </ul>
+              </div>
+              <div>
+                <a
+                  id="standard-btn"
+                  style="background: var(--gradient-brand-primary); border: 0"
+                  href="#"
+                  class="btn btn-primary w-100"
+                  >Get Started</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="col-md-4 mb-4">
+          <div
+            style="background-color: var(--bg-secondary)"
+            class="card text-white h-100"
+          >
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Premium</h5>
+              <div class="d-flex justify-content-center align-items-baseline">
+                <div>
+                  <h2 id="price-premium" class="fw-bold">510 Tk</h2>
+                </div>
+                <div>
+                  <h2
+                    style="color: var(--text-tertiary)"
+                    class="price-text fs-6"
+                  >
+                    /month
+                  </h2>
+                </div>
+              </div>
+
+              <ul class="list mt-3 mb-4 text-start">
+                <li>4K Ultra HD</li>
+                <li>6 Devices</li>
+                <li>Early Access</li>
+                <li>All Devices</li>
+                <li>Download Offline</li>
+                <li>Family Profiles</li>
+              </ul>
+              <a href="#" class="btn btn-secondary w-100">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-3 text-secondary">
+        Or rent individual movies starting from 20 Tk
+      </p>
     </div>
 
     <script>
@@ -868,7 +1051,7 @@
           const firstCard = slider.querySelector(".movie-card");
           if (!firstCard) return 0;
           const cardStyle = window.getComputedStyle(firstCard);
-          const cardMarginRight = parseInt(cardStyle.marginRight) || 20; 
+          const cardMarginRight = parseInt(cardStyle.marginRight) || 20;
           return firstCard.offsetWidth + cardMarginRight;
         };
 
@@ -893,7 +1076,7 @@
           const firstCard = slider.querySelector(".series-card");
           if (!firstCard) return 0;
           const cardStyle = window.getComputedStyle(firstCard);
-          const cardMarginRight = parseInt(cardStyle.marginRight) || 20; 
+          const cardMarginRight = parseInt(cardStyle.marginRight) || 20;
           return firstCard.offsetWidth + cardMarginRight;
         };
 
@@ -906,6 +1089,32 @@
           const cardWidth = getCardWidth();
           slider.scrollBy({ left: -cardWidth, behavior: "smooth" });
         });
+      });
+
+      //For billing toggle button
+      const billingToggle = document.getElementById("billingToggle");
+      billingToggle.addEventListener("click", () => {
+        const price_basic = document.getElementById("price-basic");
+        const price_standard = document.getElementById("price-standard");
+        const price_premium = document.getElementById("price-premium");
+        const priceText = document.querySelectorAll(".price-text");
+        if (billingToggle.checked) {
+          price_basic.innerHTML = "2680 Tk";
+          price_standard.innerHTML = "3200 Tk";
+          price_premium.innerHTML = "4800 Tk";
+
+          priceText.forEach((e) => {
+            e.innerHTML = "/year";
+          });
+        } else {
+          price_basic.innerHTML = "280 Tk";
+          price_standard.innerHTML = "340 Tk";
+          price_premium.innerHTML = "510 Tk";
+
+          priceText.forEach((e) => {
+            e.innerHTML = "/month";
+          });
+        }
       });
     </script>
 
