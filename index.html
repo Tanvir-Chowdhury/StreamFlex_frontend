@@ -11,6 +11,8 @@
       crossorigin="anonymous"
     />
 
+    <link rel="stylesheet" href="css/navbar.css">
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
       rel="stylesheet"
@@ -21,6 +23,8 @@
   </head>
 
   <body style="background-color: var(--bg-primary)">
+
+    <!-- Navbar -->
     <nav
       style="background-color: var(--bg-primary)"
       class="navbar navbar-expand-lg fixed-top py-2"
@@ -44,23 +48,23 @@
         <div class="collapse navbar-collapse" id="navbarlinks">
           <ul class="navbar-nav me-auto ms-3">
             <li class="nav-item">
-              <a class="nav-link active text-white font-weight-bold" href="#"
+              <a class="nav-link active text-white font-weight-bold" href="index.html"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a style="color: var(--text-tertiary)" class="nav-link" href="#"
+              <a style="color: var(--text-tertiary)" class="nav-link" href="movies.html"
                 >Movies</a
               >
             </li>
             <li class="nav-item">
-              <a style="color: var(--text-tertiary)" class="nav-link" href="#"
+              <a style="color: var(--text-tertiary)" class="nav-link" href="series.html"
                 >Series</a
               >
             </li>
             <li class="nav-item">
-              <a style="color: var(--text-tertiary)" class="nav-link" href="#"
-                >Categories</a
+              <a style="color: var(--text-tertiary)" class="nav-link" href="subscription.html"
+                >Subscription</a
               >
             </li>
           </ul>
@@ -663,11 +667,10 @@
      <div style="background-color: var(--bg-secondary);" class="mt-5">
     <div style="width: 80%" class="container py-5 text-center text-white">
       <h2 class="fw-bold mb-2">Choose Your Plan</h2>
-      <p class="text-secondary mb-4">
+      <p style="color: var(--text-secondary);" class="mb-4">
         Unlimited movies and series, cancel anytime
       </p>
 
-      <!-- Toggle -->
       <div class="d-flex justify-content-center align-items-center mb-5">
         <span class="me-2">Monthly</span>
         <div class="form-check form-switch">
@@ -678,7 +681,6 @@
         >
       </div>
 
-      <!-- Cards -->
       <div class="row justify-content-center">
         <!-- Basic Plan -->
         <div class="col-md-4 mb-4">
@@ -805,7 +807,7 @@
         </div>
       </div>
 
-      <p class="mt-3 text-secondary">
+      <p style="color: var(--text-secondary);" class="mt-3 ">
         Or rent individual movies starting from 20 Tk
       </p>
     </div>
@@ -814,6 +816,7 @@
 
     <!-- Footer -->
     <footer style="background-color: var(--bg-primary); color: var(--text-tertiary);" class="pt-5 pb-3">
+      <hr class="mb-4">
       <div class="container">
         <div class="row text-start">
           <div class="col-md-4 mb-4">

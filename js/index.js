@@ -1,3 +1,5 @@
+//For movies
+
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.getElementById("slider");
   const prevButton = document.getElementById("prev-slide");
