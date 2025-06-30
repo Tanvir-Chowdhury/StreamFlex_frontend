@@ -1,0 +1,110 @@
+:root {
+  /* Brand Colors */
+  --brand-purple: #8b5cf6;
+  --brand-purple-dark: #7c3aed;
+  --brand-blue: #3b82f6;
+  --brand-blue-dark: #2563eb;
+
+  /* Background */
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+
+  /* Texts */
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  
+  /* Gradients */
+  --gradient-brand-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  position: relative;
+}
+
+.form-container {
+  background-color: var(--bg-secondary);
+  padding: 2.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 480px;
+}
+
+.form-control {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--bg-tertiary);
+  padding: 0.75rem 1rem;
+}
+
+.form-control:focus {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--brand-purple);
+  box-shadow: 0 0 0 0.25rem rgba(139, 92, 246, 0.25);
+}
+
+.form-control::placeholder {
+  color: var(--text-tertiary);
+}
+
+.btn-primary {
+  background: var(--gradient-brand-primary);
+  border: none;
+  padding: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+   filter: brightness(1.1);
+}
+
+.btn-outline-light {
+    border-color: var(--bg-tertiary);
+    padding: 0.75rem;
+    font-weight: 500;
+}
+
+.auth-link {
+  color: var(--brand-purple);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link:hover {
+  color: var(--brand-purple-dark);
+  text-decoration: underline;
+}
+
+.divider {
+    color: var(--text-tertiary);
+}
+
+.admin-login-link {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.admin-login-link:hover {
+    color: var(--text-primary);
+}
+
+.btn-group .btn {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--bg-tertiary);
+}
+
+.btn-group .btn.active {
+    background: var(--gradient-brand-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--brand-purple);
+}
