@@ -1,0 +1,19 @@
+.nav-link:hover,
+      .bi-person:hover {
+        color: white !important;
+      }
+
+      input::placeholder {
+        color: var(--text-tertiary) !important;
+      }
+
+      input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        display: none;
+      }
+
+      .navbar-toggler,
+      input {
+        outline: none !important;
+        box-shadow: none !important;
+      }

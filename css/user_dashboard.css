@@ -1,0 +1,6 @@
+.slider-container .movie-card {
+  flex: 0 0 calc(25% - 16px);
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+}
