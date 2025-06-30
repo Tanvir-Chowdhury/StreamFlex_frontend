@@ -14,11 +14,99 @@
     />
 
     <link rel="stylesheet" href="css/brand.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
   </head>
   <body
     style="background-color: var(--bg-primary); color: var(--text-secondary)"
   >
-    <div class="container py-5">
+
+  <nav
+      style="background-color: var(--bg-primary)"
+      class="navbar navbar-expand-lg fixed-top py-2"
+    >
+      <div style="width: 80%" class="container-fluid">
+        <a class="navbar-brand fw-bold text-white" href="index.html">
+          Stream<span style="color: var(--brand-purple)">Flex</span>
+        </a>
+
+        <!-- mobile menu -->
+        <button
+          class="navbar-toggler navbar-dark text-white border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarlinks"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- links -->
+        <div class="collapse navbar-collapse" id="navbarlinks">
+          <ul class="navbar-nav me-auto ms-3">
+            <li class="nav-item">
+              <a
+                class="nav-link active text-white font-weight-bold"
+                href="index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="movies.html"
+                >Movies</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="series.html"
+                >Series</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="subscription.html"
+                >Subscription</a
+              >
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center">
+            <!-- Search Input -->
+            <form
+              style="background-color: var(--bg-tertiary)"
+              class="d-flex align-items-center px-3 rounded-pill"
+              style="min-width: 250px"
+            >
+              <i
+                style="color: var(--text-tertiary)"
+                class="bi bi-search me-2"
+              ></i>
+              <input
+                class="form-control border-0 bg-transparent text-white"
+                type="search"
+                placeholder="Search movies, series..."
+                aria-label="Search"
+              />
+            </form>
+
+            <!-- User Icon -->
+            <div class="ms-3">
+              <i
+                style="color: var(--text-tertiary)"
+                class="bi bi-person fs-5"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container py-5 mt-5">
       <h1 class="text-center fw-bold text-white mb-5">Contact & Support</h1>
 
       <div class="row g-4 mb-5">
@@ -33,7 +121,7 @@
               <div class="mb-3">
                 <label class="form-label">Your Name</label>
                 <input
-                id="contactName"
+                  id="contactName"
                   style="background-color: var(--bg-tertiary)"
                   type="text"
                   class="form-control text-white border-0"
@@ -43,7 +131,7 @@
               <div class="mb-3">
                 <label class="form-label">Email Address</label>
                 <input
-                id="contactEmail"
+                  id="contactEmail"
                   style="background-color: var(--bg-tertiary)"
                   type="email"
                   class="form-control text-white border-0"
@@ -184,7 +272,11 @@
           <div class="accordion-item bg-transparent border-0">
             <h2 class="accordion-header">
               <button
-                class="accordion-button bg-dark text-white"
+                style="
+                  background-color: var(--bg-tertiary);
+                  border: 1px solid var(--bg-secondary);
+                "
+                class="accordion-button text-white"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#faq1"
@@ -197,7 +289,13 @@
               class="accordion-collapse collapse show"
               data-bs-parent="#faqAccordion"
             >
-              <div class="accordion-body bg-dark text-secondary">
+              <div
+                style="
+                  background-color: var(--bg-secondary);
+                  color: var(--text-tertiary);
+                "
+                class="accordion-body"
+              >
                 Go to your profile settings, then click “Reset Password” and
                 follow the email instructions.
               </div>
@@ -206,7 +304,11 @@
           <div class="accordion-item bg-transparent border-0">
             <h2 class="accordion-header">
               <button
-                class="accordion-button bg-dark text-white collapsed"
+                style="
+                  background-color: var(--bg-tertiary);
+                  border: 1px solid var(--bg-secondary);
+                "
+                class="accordion-button text-white collapsed"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#faq2"
@@ -219,7 +321,13 @@
               class="accordion-collapse collapse"
               data-bs-parent="#faqAccordion"
             >
-              <div class="accordion-body bg-dark text-secondary">
+              <div
+                style="
+                  background-color: var(--bg-secondary);
+                  color: var(--text-tertiary);
+                "
+                class="accordion-body"
+              >
                 Head to the billing section and click on “Cancel Subscription”
                 beside your active plan.
               </div>
@@ -228,7 +336,11 @@
           <div class="accordion-item bg-transparent border-0">
             <h2 class="accordion-header">
               <button
-                class="accordion-button bg-dark text-white collapsed"
+                style="
+                  background-color: var(--bg-tertiary);
+                  border: 1px solid var(--bg-secondary);
+                "
+                class="accordion-button text-white collapsed"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#faq3"
@@ -241,7 +353,13 @@
               class="accordion-collapse collapse"
               data-bs-parent="#faqAccordion"
             >
-              <div class="accordion-body bg-dark text-secondary">
+              <div
+                style="
+                  background-color: var(--bg-secondary);
+                  color: var(--text-tertiary);
+                "
+                class="accordion-body"
+              >
                 Message us directly using WhatsApp or the form above for urgent
                 support.
               </div>
@@ -251,7 +369,117 @@
       </div>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- Footer -->
+    <footer
+      style="background-color: var(--bg-primary); color: var(--text-tertiary)"
+      class="pb-3"
+    >
+      <hr class="mb-4 mt-0" />
+      <div class="container">
+        <div class="row text-start">
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold text-white">
+              Stream<span style="color: var(--brand-purple)">Flex</span>
+            </h5>
+            <p class="text-secondary mb-0">
+              Your ultimate destination for seriess and series streaming.
+            </p>
+          </div>
+          <div class="col-md-2 mb-4">
+            <h6 class="fw-semibold text-white">Company</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="subscription.html"
+                  class="text-decoration-none"
+                  >Subscription</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="movies.html"
+                  class="text-decoration-none"
+                  >Movies</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="series.html"
+                  class="text-decoration-none"
+                  >Series</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h6 class="fw-semibold text-white">Support</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="contact.html"
+                  class="text-decoration-none"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h6 class="fw-semibold text-white">Follow Us</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Facebook</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Twitter</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Instagram</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr class="border-secondary" />
+        <div class="text-center text-secondary small">
+          © 2024 StreamFlex. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       document
