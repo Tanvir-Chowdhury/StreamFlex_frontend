@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamFlex - Movie Details</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../css/brand.css" />
+    <link rel="stylesheet" href="./css/navbar.css" />
+    <link rel="stylesheet" href="css/movie_details.css" />
+  </head>
+  <body style="background-color: var(--bg-primary); color: var(--text-primary)">
+    <nav
+      style="background-color: var(--bg-primary)"
+      class="navbar navbar-expand-lg fixed-top py-2"
+    >
+      <div style="width: 80%" class="container-fluid">
+        <a class="navbar-brand fw-bold text-white" href="index.html">
+          Stream<span style="color: var(--brand-purple)">Flex</span>
+        </a>
+
+        <!-- mobile menu -->
+        <button
+          class="navbar-toggler navbar-dark text-white border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarlinks"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- links -->
+        <div class="collapse navbar-collapse" id="navbarlinks">
+          <ul class="navbar-nav me-auto ms-3">
+            <li class="nav-item">
+              <a
+                class="nav-link active text-white font-weight-bold"
+                href="index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="movies.html"
+                >Movies</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="series.html"
+                >Series</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="subscription.html"
+                >Subscription</a
+              >
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center">
+            <!-- Search Input -->
+            <form
+              style="background-color: var(--bg-tertiary)"
+              class="d-flex align-items-center px-3 rounded-pill"
+              style="min-width: 250px"
+            >
+              <i
+                style="color: var(--text-tertiary)"
+                class="bi bi-search me-2"
+              ></i>
+              <input
+                class="form-control border-0 bg-transparent text-white"
+                type="search"
+                placeholder="Search movies, series..."
+                aria-label="Search"
+              />
+            </form>
+
+            <!-- User Icon -->
+            <div class="ms-3">
+              <i
+                style="color: var(--text-tertiary)"
+                class="bi bi-person fs-5"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top: 100px">
+      <!-- Trailer Section -->
+      <div class="movie-trailer mb-5 text-center">
+        <div class="trailer-wrapper">
+          <iframe
+            width="720"
+            height="405"
+            src="https://www.youtube.com/embed/5PSNL1qE6VY"
+            title="Avatar (2009) Trailer"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+      </div>
+
+      <div class="movie-info mb-4">
+        <h2 class="mb-3">Avatar (2009)</h2>
+        <p class="text-muted mb-3">
+          A paraplegic Marine dispatched to the moon Pandora on a unique mission
+          becomes torn between following his orders and protecting the world he
+          feels is his home.
+        </p>
+        <div class="meta-info">
+          <p><strong>Genre:</strong> Action, Adventure, Fantasy</p>
+          <p><strong>Director:</strong> James Cameron</p>
+          <p>
+            <strong>Cast:</strong> Sam Worthington, Zoe Saldana, Sigourney
+            Weaver
+          </p>
+        </div>
+      </div>
+
+      <div class="rating-review mb-4">
+        <h5>
+          <i class="bi bi-star-fill" style="color: var(--gold)"></i> 7.9/10 IMDb
+          Rating
+        </h5>
+        <p class="text-tertiary">Based on 1.3M+ reviews</p>
+      </div>
+
+      <div class="action-buttons d-flex gap-3 flex-wrap mb-5">
+        <button class="btn btn-outline-light px-4 py-2">
+          <i class="bi bi-cart-plus me-2"></i>Add to Cart
+        </button>
+        <a href="./subscription.html"
+          ><button class="btn btn-secondary px-4 py-2">
+            <i class="bi bi-box-arrow-in-down me-2"></i>Subscribe to Watch
+          </button></a
+        >
+        <a
+          href="watch_movie.html"
+          class="btn btn-light text-dark fw-semibold px-4 py-2"
+          ><i class="bi bi-play-fill me-2"></i>Watch Movie</a
+        >
+      </div>
+
+      <!-- Footer -->
+      <footer
+        style="background-color: var(--bg-primary); color: var(--text-tertiary)"
+        class="pb-3"
+      >
+        <hr class="mb-4 mt-0" />
+        <div class="container">
+          <div class="row text-start">
+            <div class="col-md-4 mb-4">
+              <h5 class="fw-bold text-white">
+                Stream<span style="color: var(--brand-purple)">Flex</span>
+              </h5>
+              <p class="text-secondary mb-0">
+                Your ultimate destination for movies and series streaming.
+              </p>
+            </div>
+            <div class="col-md-2 mb-4">
+              <h6 class="fw-semibold text-white">Company</h6>
+              <ul class="list-unstyled">
+                <li>
+                  <a
+                    style="color: var(--text-tertiary)"
+                    href="subscription.html"
+                    class="text-decoration-none"
+                    >Subscription</a
+                  >
+                </li>
+                <li>
+                  <a
+                    style="color: var(--text-tertiary)"
+                    href="movies.html"
+                    class="text-decoration-none"
+                    >Movies</a
+                  >
+                </li>
+                <li>
+                  <a
+                    style="color: var(--text-tertiary)"
+                    href="series.html"
+                    class="text-decoration-none"
+                    >Series</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+              <h6 class="fw-semibold text-white">Support</h6>
+              <ul class="list-unstyled">
+                <li>
+                  <a
+                    style="color: var(--text-tertiary)"
+                    href="#"
+                    class="text-decoration-none"
+                    >Help Center</a
+                  >
+                </li>
+                <li>
+                  <a
+                    style="color: var(--text-tertiary)"
+                    href="contact.html"
+                    class="text-decoration-none"
+                    >Contact Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    style="color: var(--text-tertiary)"
+                    href="#"
+                    class="text-decoration-none"
+                    >Privacy Policy</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+              <h6 class="fw-semibold text-white">Follow Us</h6>
+              <ul class="list-unstyled">
+                <li>
+                  <a
+                    style="color: var(--text-tertiary)"
+                    href="#"
+                    class="text-decoration-none"
+                    >Facebook</a
+                  >
+                </li>
+                <li>
+                  <a
+                    style="color: var(--text-tertiary)"
+                    href="#"
+                    class="text-decoration-none"
+                    >Twitter</a
+                  >
+                </li>
+                <li>
+                  <a
+                    style="color: var(--text-tertiary)"
+                    href="#"
+                    class="text-decoration-none"
+                    >Instagram</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <hr class="border-secondary" />
+          <div class="text-center text-secondary small">
+            © 2024 StreamFlex. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/movie_details.js"></script>
+  </body>
+</html>

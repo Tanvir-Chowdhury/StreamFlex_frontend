@@ -91,7 +91,7 @@ function renderMovies(list) {
           <div class="image-overlay">
             <div class="overlay-buttons d-flex">
               <button class="overlay-btn"><i class="bi bi-play-circle-fill"></i></button>
-              <button class="overlay-btn"><i class="bi bi-bookmark-plus-fill"></i></button>
+             
             </div>
           </div>
         </div>

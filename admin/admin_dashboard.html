@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - StreamFlex</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../css/brand.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="./css/admin_dashboard.css" />
+  </head>
+  <body style="background-color: var(--bg-primary); color: var(--text-primary)">
+    <!-- Navbar -->
+    <nav
+      style="background-color: var(--bg-primary)"
+      class="navbar navbar-expand-lg fixed-top py-2"
+    >
+      <div style="width: 80%" class="container-fluid">
+        <a class="navbar-brand fw-bold text-white" href="index.html">
+          Stream<span style="color: var(--brand-purple)">Flex</span>
+        </a>
+
+        <!-- mobile menu -->
+        <button
+          class="navbar-toggler navbar-dark text-white border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarlinks"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- links -->
+        <div class="collapse navbar-collapse" id="navbarlinks">
+          <ul class="navbar-nav me-auto ms-3">
+            <li class="nav-item">
+              <a
+                class="nav-link active text-white font-weight-bold"
+                href="index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="movies.html"
+                >Movies</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="series.html"
+                >Series</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="subscription.html"
+                >Subscription</a
+              >
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center">
+            <!-- Search Input -->
+            <form
+              style="background-color: var(--bg-tertiary)"
+              class="d-flex align-items-center px-3 rounded-pill"
+              style="min-width: 250px"
+            >
+              <i
+                style="color: var(--text-tertiary)"
+                class="bi bi-search me-2"
+              ></i>
+              <input
+                class="form-control border-0 bg-transparent text-white"
+                type="search"
+                placeholder="Search movies, series..."
+                aria-label="Search"
+              />
+            </form>
+
+            <!-- User Icon -->
+            <div class="ms-3">
+              <i
+                style="color: var(--text-tertiary)"
+                class="bi bi-person fs-5"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="container" style="padding-top: 100px">
+      <h2 class="mb-4 fw-bold">Admin Dashboard</h2>
+
+      <!-- Stats -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="stat-card bg-dark text-white p-4 rounded">
+            <h5>Total Users</h5>
+            <h2>2,520</h2>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card bg-dark text-white p-4 rounded">
+            <h5>Subscribers</h5>
+            <h2>1,180</h2>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card bg-dark text-white p-4 rounded">
+            <h5>Purchases</h5>
+            <h2>3,950</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recently Uploaded -->
+      <div class="section mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-semibold">Recently Uploaded Movies</h4>
+        </div>
+        <div class="d-flex gap-3 flex-wrap">
+          <div class="movie-card">
+            <img src="../images/avatar.jpg" alt="Avatar" class="movie-thumb" />
+            <div class="movie-meta">Avatar<br /><span>2009 · Action</span></div>
+          </div>
+          <div class="movie-card">
+            <img src="../images/matrix.jpg" alt="Matrix" class="movie-thumb" />
+            <div class="movie-meta">Matrix<br /><span>1999 · Crime</span></div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="../images/titanic.jpg"
+              alt="Titanic"
+              class="movie-thumb"
+            />
+            <div class="movie-meta">
+              Titanic<br /><span>1997 · Sci-Fi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="section mb-5">
+        <h4 class="fw-semibold mb-3">Quick Actions</h4>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="./movie_management.html"
+            ><button class="btn btn-purple">Update Movies</button></a
+          >
+          <a href="./admin_user_management.html"
+            ><button class="btn btn-outline-light">View Users</button></a
+          >
+          <a href="./transactions.html"
+            ><button class="btn btn-outline-light">
+              View All Purchases
+            </button></a
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      style="background-color: var(--bg-primary); color: var(--text-tertiary)"
+      class="pb-3"
+    >
+      <hr class="mb-4 mt-0" />
+      <div class="container">
+        <div class="row text-start">
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold text-white">
+              Stream<span style="color: var(--brand-purple)">Flex</span>
+            </h5>
+            <p class="text-secondary mb-0">
+              Your ultimate destination for movies and series streaming.
+            </p>
+          </div>
+          <div class="col-md-2 mb-4">
+            <h6 class="fw-semibold text-white">Company</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="subscription.html"
+                  class="text-decoration-none"
+                  >Subscription</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="movies.html"
+                  class="text-decoration-none"
+                  >Movies</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="series.html"
+                  class="text-decoration-none"
+                  >Series</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h6 class="fw-semibold text-white">Support</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="contact.html"
+                  class="text-decoration-none"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h6 class="fw-semibold text-white">Follow Us</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Facebook</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Twitter</a
+                >
+              </li>
+              <li>
+                <a
+                  style="color: var(--text-tertiary)"
+                  href="#"
+                  class="text-decoration-none"
+                  >Instagram</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr class="border-secondary" />
+        <div class="text-center text-secondary small">
+          © 2024 StreamFlex. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/admin_dashboard.js"></script>
+  </body>
+</html>
