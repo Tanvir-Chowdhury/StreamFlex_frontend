@@ -1,0 +1,59 @@
+<footer style="background-color: var(--bg-primary); color: var(--text-tertiary)" class="pb-3">
+    <hr class="mb-4 mt-0" />
+    <div class="container">
+      <div class="row text-start">
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold text-white">
+            Stream<span style="color: var(--brand-purple)">Flex</span>
+          </h5>
+          <p class="text-secondary mb-0">
+            Your ultimate destination for movies and series streaming.
+          </p>
+        </div>
+        <div class="col-md-2 mb-4">
+          <h6 class="fw-semibold text-white">Company</h6>
+          <ul class="list-unstyled">
+            <li>
+              <a style="color: var(--text-tertiary)" href="subscription.php"
+                class="text-decoration-none">Subscription</a>
+            </li>
+            <li>
+              <a style="color: var(--text-tertiary)" href="movies.php" class="text-decoration-none">Movies</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h6 class="fw-semibold text-white">Support</h6>
+          <ul class="list-unstyled">
+            <li>
+              <a style="color: var(--text-tertiary)" href="#" class="text-decoration-none">Help Center</a>
+            </li>
+            <li>
+              <a style="color: var(--text-tertiary)" href="contact.php" class="text-decoration-none">Contact Us</a>
+            </li>
+            <li>
+              <a style="color: var(--text-tertiary)" href="#" class="text-decoration-none">Privacy Policy</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h6 class="fw-semibold text-white">Follow Us</h6>
+          <ul class="list-unstyled">
+            <li>
+              <a style="color: var(--text-tertiary)" href="#" class="text-decoration-none">Facebook</a>
+            </li>
+            <li>
+              <a style="color: var(--text-tertiary)" href="#" class="text-decoration-none">Twitter</a>
+            </li>
+            <li>
+              <a style="color: var(--text-tertiary)" href="#" class="text-decoration-none">Instagram</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr class="border-secondary" />
+      <div class="text-center text-secondary small">
+        © 2024 StreamFlex. All rights reserved.
+      </div>
+    </div>
+  </footer>

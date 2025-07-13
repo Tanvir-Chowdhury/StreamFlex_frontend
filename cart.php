@@ -1,3 +1,63 @@
+<?php
+// 1. START THE SESSION
+session_start();
+
+// 2. PROTECT THE PAGE
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+// --- !!! IMPORTANT: DATABASE CONNECTION GOES HERE !!! ---
+// include 'db_connection.php';
+
+// 3. SIMULATE A "PRODUCTS" DATABASE
+// In a real application, you would query your database for this data.
+$products_db = [
+    1 => ['id' => 1, 'title' => 'Civil War', 'thumbnail' => '/images/civilwar.jpg', 'rating' => 7.6, 'price' => 550.00],
+    2 => ['id' => 2, 'title' => 'Avatar', 'thumbnail' => '/images/avatar.jpg', 'rating' => 8.7, 'price' => 700.00],
+    3 => ['id' => 3, 'title' => 'The King\'s Man', 'thumbnail' => '/images/kingsman.jpg', 'rating' => 8.1, 'price' => 450.00]
+];
+
+// 4. INITIALIZE THE CART IN THE SESSION (if it doesn't exist)
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+    // For demonstration, let's add some items to the cart automatically.
+    // In your real app, items would be added from your movie pages.
+    $_SESSION['cart'][1] = 1; // Key is product ID, value is quantity (always 1 for movies)
+    $_SESSION['cart'][2] = 1;
+}
+
+// 5. HANDLE "REMOVE FROM CART" ACTION
+if (isset($_GET['remove'])) {
+    $remove_id = (int)$_GET['remove'];
+    if (isset($_SESSION['cart'][$remove_id])) {
+        unset($_SESSION['cart'][$remove_id])
+        header('Location: cart.php');
+        exit();
+    }
+}
+
+// 6. PREPARE CART ITEMS FOR DISPLAY
+$cart_items_details = [];
+$subtotal = 0.00;
+if (!empty($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $product_id => $quantity) {
+        // Fetch product details from our simulated DB
+        if (isset($products_db[$product_id])) {
+            $product = $products_db[$product_id];
+            $cart_items_details[] = $product;
+            $subtotal += $product['price'] * $quantity;
+        }
+    }
+}
+
+// 7. CALCULATE TOTALS
+const TAX_RATE = 0.015;
+$taxes = $subtotal * TAX_RATE;
+$total = $subtotal + $taxes;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +66,10 @@
   <title>Your Cart - StreamFlex</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/cart.css">
-  <link rel="stylesheet" href="./css/brand.css">
-  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/brand.css">
+  <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body style="padding-top: 70px;">
   <nav
@@ -17,7 +77,7 @@
       class="navbar navbar-expand-lg fixed-top py-2"
     >
       <div style="width: 80%" class="container-fluid">
-        <a class="navbar-brand fw-bold text-white" href="index.html">
+        <a class="navbar-brand fw-bold text-white" href="index.php">
           Stream<span style="color: var(--brand-purple)">Flex</span>
         </a>
 
@@ -37,7 +97,7 @@
             <li class="nav-item">
               <a
                 class="nav-link active text-white font-weight-bold"
-                href="index.html"
+                href="index.php"
                 >Home</a
               >
             </li>
@@ -45,7 +105,7 @@
               <a
                 style="color: var(--text-tertiary)"
                 class="nav-link"
-                href="movies.html"
+                href="movies.php"
                 >Movies</a
               >
             </li>
@@ -53,7 +113,7 @@
               <a
                 style="color: var(--text-tertiary)"
                 class="nav-link"
-                href="series.html"
+                href="series.php"
                 >Series</a
               >
             </li>
@@ -61,7 +121,7 @@
               <a
                 style="color: var(--text-tertiary)"
                 class="nav-link"
-                href="subscription.html"
+                href="subscription.php"
                 >Subscription</a
               >
             </li>
@@ -88,10 +148,10 @@
 
             <!-- User Icon -->
             <div class="ms-3">
-              <i
+              <a href="login.php"><i
                 style="color: var(--text-tertiary)"
                 class="bi bi-person fs-5"
-              ></i>
+              ></i></a>
             </div>
           </div>
         </div>
@@ -101,32 +161,58 @@
     <div class="row">
       <div class="col-lg-8">
         <h1 class="h2 mb-4 fw-bold">Your Cart</h1>
-        <div id="cart-items-container">
-        </div>
-        <div id="empty-cart-message" class="d-none">
-            <h3 class="text-secondary">Your cart is empty</h3>
-            <p class="text-muted">Looks like you haven't added any movies to your cart yet.</p>
-            <a href="index.html" class="btn btn-primary mt-3">Browse Movies</a>
-        </div>
+        
+        <?php if (empty($cart_items_details)): ?>
+            <!-- This block shows if the cart is empty -->
+            <div id="empty-cart-message">
+                <h3 class="text-secondary">Your cart is empty</h3>
+                <p class="text-muted">Looks like you haven't added any movies to your cart yet.</p>
+                <a href="index.php" class="btn btn-primary mt-3">Browse Movies</a>
+            </div>
+        <?php else: ?>
+            <!-- This block shows if the cart has items -->
+            <div id="cart-items-container">
+                <?php foreach ($cart_items_details as $item): ?>
+                    <div class="cart-item">
+                        <img src="<?php echo htmlspecialchars($item['thumbnail']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>" class="cart-item-img" onerror="this.onerror=null;this.src='https://placehold.co/80x120/1f2937/ffffff?text=Error';">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title"><?php echo htmlspecialchars($item['title']); ?></div>
+                            <div class="cart-item-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span><?php echo htmlspecialchars($item['rating']); ?></span>
+                            </div>
+                        </div>
+                        <div class="cart-item-price">BDT <?php echo number_format($item['price'], 2); ?></div>
+                        <a href="cart.php?remove=<?php echo $item['id']; ?>" class="remove-btn" title="Remove item">
+                            <i class="bi bi-x-lg"></i>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
       </div>
       <div class="col-lg-4">
         <div class="summary-card">
           <h2 class="summary-title">Order Summary</h2>
           <div class="summary-item">
             <span>Subtotal</span>
-            <span id="summary-subtotal">BDT 0.00</span>
+            <span id="summary-subtotal">BDT <?php echo number_format($subtotal, 2); ?></span>
           </div>
           <div class="summary-item">
-            <span>Taxes & Fees (1.5%)</span>
-            <span id="summary-taxes">BDT 0.00</span>
+            <span>Taxes & Fees (<?php echo TAX_RATE * 100; ?>%)</span>
+            <span id="summary-taxes">BDT <?php echo number_format($taxes, 2); ?></span>
           </div>
           <hr style="border-color: var(--bg-tertiary);">
           <div class="summary-item summary-total">
             <span>Total</span>
-            <span id="summary-total">BDT 0.00</span>
+            <span id="summary-total">BDT <?php echo number_format($total, 2); ?></span>
           </div>
           <div class="d-grid mt-4">
-            <a href="payment.html" id="checkout-btn" class="btn btn-primary">Proceed to Checkout</a>
+            <!-- The button is disabled if the cart is empty -->
+            <a href="payment.php" id="checkout-btn" class="btn btn-primary <?php if (empty($cart_items_details)) echo 'disabled'; ?>">
+              Proceed to Checkout
+            </a>
           </div>
         </div>
       </div>
@@ -155,7 +241,7 @@
               <li>
                 <a
                   style="color: var(--text-tertiary)"
-                  href="subscription.html"
+                  href="subscription.php"
                   class="text-decoration-none"
                   >Subscription</a
                 >
@@ -163,7 +249,7 @@
               <li>
                 <a
                   style="color: var(--text-tertiary)"
-                  href="movies.html"
+                  href="movies.php"
                   class="text-decoration-none"
                   >Movies</a
                 >
@@ -171,7 +257,7 @@
               <li>
                 <a
                   style="color: var(--text-tertiary)"
-                  href="series.html"
+                  href="series.php"
                   class="text-decoration-none"
                   >Series</a
                 >
@@ -243,100 +329,6 @@
         </div>
       </div>
     </footer>
-
-  <script>
-    let cartItems = [
-      {
-        id: 1,
-        title: 'Civil War',
-        thumbnail: '/images/civilwar.jpg',
-        rating: 7.6,
-        price: 550.00
-      },
-      {
-        id: 2,
-        title: 'Avatar',
-        thumbnail: '/images/avatar.jpg',
-        rating: 8.7,
-        price: 700.00
-      },
-      {
-        id: 3,
-        title: 'The King\'s Man',
-        thumbnail: '/images/kingsman.jpg',
-        rating: 8.1,
-        price: 450.00
-      }
-    ];
-
-    const TAX_RATE = 0.015;
-
-    const cartContainer = document.getElementById('cart-items-container');
-    const emptyCartMessage = document.getElementById('empty-cart-message');
-    const checkoutBtn = document.getElementById('checkout-btn');
-    const subtotalEl = document.getElementById('summary-subtotal');
-    const taxesEl = document.getElementById('summary-taxes');
-    const totalEl = document.getElementById('summary-total');
-
-    function renderCart() {
-      cartContainer.innerHTML = '';
-      
-      if (cartItems.length === 0) {
-        showEmptyCartMessage();
-      } else {
-        hideEmptyCartMessage();
-        cartItems.forEach(item => {
-          const itemEl = document.createElement('div');
-          itemEl.classList.add('cart-item');
-          itemEl.innerHTML = `
-            <img src="${item.thumbnail}" alt="${item.title}" class="cart-item-img" onerror="this.onerror=null;this.src='https://placehold.co/80x120/1f2937/ffffff?text=Error';">
-            <div class="cart-item-details">
-              <div class="cart-item-title">${item.title}</div>
-              <div class="cart-item-rating">
-                <i class="bi bi-star-fill"></i>
-                <span>${item.rating}</span>
-              </div>
-            </div>
-            <div class="cart-item-price">BDT ${item.price.toFixed(2)}</div>
-            <button class="remove-btn" onclick="removeItem(${item.id})">
-              <i class="bi bi-x-lg"></i>
-            </button>
-          `;
-          cartContainer.appendChild(itemEl);
-        });
-      }
-      updateSummary();
-    }
-
-    function updateSummary() {
-      const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
-      const taxes = subtotal * TAX_RATE;
-      const total = subtotal + taxes;
-
-      subtotalEl.textContent = `BDT ${subtotal.toFixed(2)}`;
-      taxesEl.textContent = `BDT ${taxes.toFixed(2)}`;
-      totalEl.textContent = `BDT ${total.toFixed(2)}`;
-      checkoutBtn.classList.toggle('disabled', cartItems.length === 0);
-    }
-    
-    function removeItem(itemId) {
-      cartItems = cartItems.filter(item => item.id !== itemId);
-      renderCart();
-    }
-    
-    function showEmptyCartMessage() {
-        emptyCartMessage.classList.remove('d-none');
-        cartContainer.classList.add('d-none');
-    }
-    
-    function hideEmptyCartMessage() {
-        emptyCartMessage.classList.add('d-none');
-        cartContainer.classList.remove('d-none');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      renderCart();
-    });
-  </script>
 
 </body>
 </html>
