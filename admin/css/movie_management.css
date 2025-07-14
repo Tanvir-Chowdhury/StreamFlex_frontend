@@ -1,0 +1,28 @@
+body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+      }
+      .form-section {
+        background-color: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+      }
+      .table th,
+      .table td {
+        vertical-align: middle;
+      }
+      .btn-sm i {
+        pointer-events: none;
+      }
+      a {
+        color: var(--brand-blue);
+      }
+      a:hover {
+        color: var(--brand-purple);
+      }
+
+      .table-dark th,
+      .table-dark td {
+        color: var(--text-secondary);
+      }
