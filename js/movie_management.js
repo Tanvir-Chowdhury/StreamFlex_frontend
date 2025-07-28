@@ -1,3 +1,46 @@
+// document.getElementById('movieForm').addEventListener('submit', function (e) {
+//   e.preventDefault(); 
+
+//   // Collect form data
+//   const data = {
+//     title: document.getElementById('title').value,
+//     imdb_url: document.getElementById('imdb').value,
+//     movie_file_url: document.getElementById('video').value,
+//     trailer_url: document.getElementById('trailer').value,
+//     language: document.getElementById('language').value,
+//     genre: document.getElementById('genre').value,
+//     rating: document.getElementById('rating').value,
+//     release_year: document.getElementById('year').value,
+//     price: document.getElementById('price').value,
+//     description: document.getElementById('details').value,
+//     tmdb_url: '', 
+//     uploaded_by: 'admin' 
+//   };
+
+//   fetch('upload_movie.php', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(data)
+//   })
+//     .then(res => res.json())
+//     .then(response => {
+//       if (response.success) {
+//         alert('Movie uploaded successfully!');
+//         document.getElementById('movieForm').reset();
+//       } else {
+//         alert('Upload failed: ' + response.message);
+//       }
+//     })
+//     .catch(error => {
+//       console.error('Error:', error);
+//       alert('Something went wrong.');
+//     });
+// });
+
+
+
 const form = document.getElementById("movieForm");
       const tableBody = document.getElementById("movieTableBody");
       let movies = [

@@ -45,4 +45,5 @@
 
 .btn-purple:hover {
   background: var(--gradient-brand-secondary);
+  color: white;
 }

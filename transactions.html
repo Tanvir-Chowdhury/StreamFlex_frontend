@@ -3,27 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard - StreamFlex</title>
+    <title>Transaction History</title>
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
     />
     <link
-      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
     />
-    <link rel="stylesheet" href="../css/brand.css" />
     <link rel="stylesheet" href="../css/navbar.css" />
-    <link rel="stylesheet" href="./css/admin_dashboard.css" />
+    <link rel="stylesheet" href="../css/brand.css" />
+
+    <style>
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+      }
+      .form-section {
+        background-color: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+      }
+      .table th,
+      .table td {
+        vertical-align: middle;
+      }
+      .table-dark th,
+      .table-dark td {
+        color: var(--text-secondary);
+      }
+    </style>
   </head>
-  <body style="background-color: var(--bg-primary); color: var(--text-primary)">
+  <body>
     <!-- Navbar -->
     <nav
       style="background-color: var(--bg-primary)"
       class="navbar navbar-expand-lg fixed-top py-2"
     >
       <div style="width: 80%" class="container-fluid">
-        <a class="navbar-brand fw-bold text-white" href="index.html">
+        <a class="navbar-brand fw-bold text-white" href="../index.php">
           Stream<span style="color: var(--brand-purple)">Flex</span>
         </a>
 
@@ -42,8 +62,9 @@
           <ul class="navbar-nav me-auto ms-3">
             <li class="nav-item">
               <a
-                class="nav-link active text-white font-weight-bold"
-                href="index.html"
+                style="color: var(--text-tertiary)"
+                class="nav-link"
+                href="../index.php"
                 >Home</a
               >
             </li>
@@ -51,7 +72,7 @@
               <a
                 style="color: var(--text-tertiary)"
                 class="nav-link"
-                href="movies.html"
+                href="../movies.html"
                 >Movies</a
               >
             </li>
@@ -59,7 +80,7 @@
               <a
                 style="color: var(--text-tertiary)"
                 class="nav-link"
-                href="series.html"
+                href="../series.html"
                 >Series</a
               >
             </li>
@@ -67,7 +88,7 @@
               <a
                 style="color: var(--text-tertiary)"
                 class="nav-link"
-                href="subscription.html"
+                href="../subscription.php"
                 >Subscription</a
               >
             </li>
@@ -104,77 +125,56 @@
       </div>
     </nav>
 
-    <!-- Content -->
-    <main class="container" style="padding-top: 100px">
-      <h2 class="mb-4 fw-bold">Admin Dashboard</h2>
+    <div class="container py-5 mt-5">
+      <h2 class="mb-4 fw-bold">Transaction History</h2>
 
-      <!-- Stats -->
+      <!-- Filters -->
       <div class="row g-3 mb-4">
         <div class="col-md-4">
-          <div class="stat-card bg-dark text-white p-4 rounded">
-            <h5>Total Users</h5>
-            <h2>2,520</h2>
-          </div>
+          <input
+            type="text"
+            id="filterUser"
+            class="form-control"
+            placeholder="Search by user"
+          />
         </div>
         <div class="col-md-4">
-          <div class="stat-card bg-dark text-white p-4 rounded">
-            <h5>Subscribers</h5>
-            <h2>1,180</h2>
-          </div>
+          <input
+            type="text"
+            id="filterMovie"
+            class="form-control"
+            placeholder="Search by movie"
+          />
         </div>
         <div class="col-md-4">
-          <div class="stat-card bg-dark text-white p-4 rounded">
-            <h5>Purchases</h5>
-            <h2>3,950</h2>
-          </div>
+          <input type="date" id="filterDate" class="form-control" />
         </div>
       </div>
 
-      <!-- Recently Uploaded -->
-      <div class="section mb-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="fw-semibold">Recently Uploaded Movies</h4>
-        </div>
-        <div class="d-flex gap-3 flex-wrap">
-          <div class="movie-card">
-            <img src="../images/avatar.jpg" alt="Avatar" class="movie-thumb" />
-            <div class="movie-meta">Avatar<br /><span>2009 · Action</span></div>
-          </div>
-          <div class="movie-card">
-            <img src="../images/matrix.jpg" alt="Matrix" class="movie-thumb" />
-            <div class="movie-meta">Matrix<br /><span>1999 · Crime</span></div>
-          </div>
-          <div class="movie-card">
-            <img
-              src="../images/titanic.jpg"
-              alt="Titanic"
-              class="movie-thumb"
-            />
-            <div class="movie-meta">
-              Titanic<br /><span>1997 · Sci-Fi</span>
-            </div>
-          </div>
-        </div>
+      <!-- Transaction Table -->
+      <div class="table-responsive">
+        <table class="table table-dark table-bordered table-hover align-middle">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Movie</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="transactionBody"></tbody>
+        </table>
       </div>
+      <nav>
+        <ul class="pagination justify-content-center mt-4" id="pagination"></ul>
+      </nav>
 
-      <!-- Quick Actions -->
-      <div class="section mb-5">
-        <h4 class="fw-semibold mb-3">Quick Actions</h4>
-        <div class="d-flex flex-wrap gap-3">
-          <a href="./movie_management.html"
-            ><button class="btn btn-purple">Update Movies</button></a
-          >
-          <a href="./admin_user_management.html"
-            ><button class="btn btn-outline-light">View Users</button></a
-          >
-          <a href="./transactions.html"
-            ><button class="btn btn-outline-light">
-              View All Purchases
-            </button></a
-          >
-        </div>
-      </div>
-    </main>
+      <button class="btn btn-success mt-3" onclick="exportCSV()">
+        Export CSV
+      </button>
+    </div>
 
     <!-- Footer -->
     <footer
@@ -198,7 +198,7 @@
               <li>
                 <a
                   style="color: var(--text-tertiary)"
-                  href="subscription.html"
+                  href="../subscription.php"
                   class="text-decoration-none"
                   >Subscription</a
                 >
@@ -206,7 +206,7 @@
               <li>
                 <a
                   style="color: var(--text-tertiary)"
-                  href="movies.html"
+                  href="../movies.html"
                   class="text-decoration-none"
                   >Movies</a
                 >
@@ -214,7 +214,7 @@
               <li>
                 <a
                   style="color: var(--text-tertiary)"
-                  href="series.html"
+                  href="../series.html"
                   class="text-decoration-none"
                   >Series</a
                 >
@@ -235,7 +235,7 @@
               <li>
                 <a
                   style="color: var(--text-tertiary)"
-                  href="contact.html"
+                  href="../contact.html"
                   class="text-decoration-none"
                   >Contact Us</a
                 >
@@ -287,7 +287,6 @@
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/admin_dashboard.js"></script>
+    <script src="js/transactions.js"></script>
   </body>
 </html>
