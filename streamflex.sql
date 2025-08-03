@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2025 at 07:00 AM
+-- Generation Time: Aug 03, 2025 at 09:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `streamflex`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `movie_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `movie_id`, `quantity`, `added_at`) VALUES
+(3, 8, 2, 1, '2025-08-03 18:51:12'),
+(4, 8, 4, 1, '2025-08-03 18:51:17');
 
 -- --------------------------------------------------------
 
@@ -50,13 +72,16 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`movie_id`, `title`, `genre`, `rating`, `language`, `description`, `release_year`, `price`, `trailer_url`, `imdb_url`, `tmdb_url`, `movie_file_url`, `poster_image_url`, `uploaded_by`, `created_at`) VALUES
-(1, 'Avatar', 'Action', 7.9, NULL, 'A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.', '2009', 50.00, 'https://www.youtube.com/embed/5PSNL1qE6VY', 'https://www.imdb.com/title/tt0499549', 'https://www.themoviedb.org/movie/19995-avatar', 'https://nihalxx1.sol.usbx.me/filebrowser/api/public/dl/A6ObZmey/downloads/KungFuPanda04Final.mp4', 'https://image.tmdb.org/t/p/original/pxbrFOTV2j8MmZQlfin3dwz5cXV.jpg', 1, '2025-07-13 16:45:29'),
-(2, 'Ballerina', 'Thriller', 7.0, NULL, 'An assassin trained in the traditions of the Ruska Roma organization sets out to seek revenge after her father\'s death.', '2025', 100.00, 'https://www.youtube.com/embed/0FSwsrFpkbw', 'https://www.imdb.com/title/tt7181546', 'https://www.themoviedb.org/movie/541671-ballerina', 'https://nihalxx1.sol.usbx.me/filebrowser/api/public/dl/A6ObZmey/downloads/KungFuPanda04Final.mp4', 'https://image.tmdb.org/t/p/original/2VUmvqsHb6cEtdfscEA6fqqVzLg.jpg', 1, '2025-07-13 16:55:16'),
-(4, 'Sinners', 'Drama', 7.7, NULL, 'Trying to leave their troubled lives behind, twin brothers return to their hometown to start again, only to discover that an even greater evil is waiting to welcome them back.', '2025', 80.00, 'https://www.youtube.com/embed/7joulECTx_U', 'https://www.imdb.com/title/tt31193180', 'https://www.themoviedb.org/movie/1233413-sinners', 'https://nihalxx1.sol.usbx.me/filebrowser/api/public/dl/A6ObZmey/downloads/KungFuPanda04Final.mp4', 'https://image.tmdb.org/t/p/original/1FuibpeOH8Qce0z6pOLrqBc3ttK.jpg', 1, '2025-07-13 17:00:15'),
-(5, 'Jurassic World Rebirth', 'Adventure', 6.2, 'English', 'Five years post-Jurassic World: Dominion (2022), an expedition braves isolated equatorial regions to extract DNA from three massive prehistoric creatures for a groundbreaking medical breakthrough.', '2025', 95.00, 'https://www.youtube.com/embed/jan5CFWs9ic', 'https://www.imdb.com/title/tt31036941', 'https://www.themoviedb.org/movie/1234821-jurassic-world-rebirth', 'https://nihalxx1.sol.usbx.me/filebrowser/api/public/dl/A6ObZmey/downloads/KungFuPanda04Final.mp4', 'https://image.tmdb.org/t/p/original/q0fGCmjLu42MPlSO9OYWpI5w86I.jpg', 1, '2025-07-13 17:02:01'),
-(6, 'Jawan', 'Crime', 6.9, NULL, 'A prison warden recruits inmates to commit outrageous crimes that shed light on corruption and injustice - and that lead him to an unexpected reunion.', '2023', 79.00, 'https://www.youtube.com/embed/COv52Qyctws', 'https://www.imdb.com/title/tt15354916', 'https://www.themoviedb.org/movie/872906', 'https://nihalxx1.sol.usbx.me/filebrowser/api/public/dl/A6ObZmey/downloads/KungFuPanda04Final.mp4', 'https://image.tmdb.org/t/p/original/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg', 1, '2025-07-13 19:33:35'),
-(7, 'Thunderbolts', 'Action', 7.3, 'Indonesian', 'After finding themselves ensnared in a death trap, an unconventional team of antiheroes must go on a dangerous mission that will force them to confront the darkest corners of their pasts.', '2025', 40.00, 'https://www.youtube.com/embed/hUUszE29jS0', 'https://www.imdb.com/title/tt20969586', 'https://www.themoviedb.org/movie/986056-thunderbolts', 'https://nihalxx1.sol.usbx.me/filebrowser/api/public/dl/A6ObZmey/downloads/KungFuPanda04Final.mp4', 'https://image.tmdb.org/t/p/original/yBdljcPFFaj54aWVgj36MB47Pb6.jpg', 1, '2025-07-13 19:38:41'),
-(8, 'Kung Fu Panda 4', 'Animation', 6.7, 'English', 'After Po is tapped to become the Spiritual Leader of the Valley of Peace, he needs to find and train a new Dragon Warrior, while a wicked sorceress plans to re-summon all the master villains whom Po has vanquished to the spirit realm.', '2024', 70.00, 'https://www.youtube.com/embed/_inKs4eeHiI', 'https://www.imdb.com/title/tt21692408', 'https://www.themoviedb.org/movie/1011985-kung-fu-panda-4', 'https://nihalxx1.sol.usbx.me/filebrowser/api/public/dl/A6ObZmey/downloads/KungFuPanda04Final.mp4', 'https://image.tmdb.org/t/p/original/kDp1vUBnMpe8ak4rjgl3cLELqjU.jpg', 1, '2025-07-14 01:47:01');
+(2, 'Ballerina', 'Thriller', 7.0, NULL, 'An assassin trained in the traditions of the Ruska Roma organization sets out to seek revenge after her father\'s death.', '2025', 100.00, 'https://www.youtube.com/embed/0FSwsrFpkbw', 'https://www.imdb.com/title/tt7181546', 'https://www.themoviedb.org/movie/541671-ballerina', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/2VUmvqsHb6cEtdfscEA6fqqVzLg.jpg', 1, '2025-07-13 16:55:16'),
+(4, 'Sinners', 'Drama', 7.7, NULL, 'Trying to leave their troubled lives behind, twin brothers return to their hometown to start again, only to discover that an even greater evil is waiting to welcome them back.', '2025', 80.00, 'https://www.youtube.com/embed/7joulECTx_U', 'https://www.imdb.com/title/tt31193180', 'https://www.themoviedb.org/movie/1233413-sinners', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/1FuibpeOH8Qce0z6pOLrqBc3ttK.jpg', 1, '2025-07-13 17:00:15'),
+(5, 'Jurassic World Rebirth', 'Adventure', 6.2, 'English', 'Five years post-Jurassic World: Dominion (2022), an expedition braves isolated equatorial regions to extract DNA from three massive prehistoric creatures for a groundbreaking medical breakthrough.', '2025', 95.00, 'https://www.youtube.com/embed/jan5CFWs9ic', 'https://www.imdb.com/title/tt31036941', 'https://www.themoviedb.org/movie/1234821-jurassic-world-rebirth', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/q0fGCmjLu42MPlSO9OYWpI5w86I.jpg', 1, '2025-07-13 17:02:01'),
+(6, 'Jawan', 'Crime', 6.9, NULL, 'A prison warden recruits inmates to commit outrageous crimes that shed light on corruption and injustice - and that lead him to an unexpected reunion.', '2023', 79.00, 'https://www.youtube.com/embed/COv52Qyctws', 'https://www.imdb.com/title/tt15354916', 'https://www.themoviedb.org/movie/872906', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg', 1, '2025-07-13 19:33:35'),
+(7, 'Thunderbolts', 'Action', 7.3, 'Indonesian', 'After finding themselves ensnared in a death trap, an unconventional team of antiheroes must go on a dangerous mission that will force them to confront the darkest corners of their pasts.', '2025', 40.00, 'https://www.youtube.com/embed/hUUszE29jS0', 'https://www.imdb.com/title/tt20969586', 'https://www.themoviedb.org/movie/986056-thunderbolts', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/yBdljcPFFaj54aWVgj36MB47Pb6.jpg', 1, '2025-07-13 19:38:41'),
+(8, 'Kung Fu Panda 4', 'Animation', 6.7, 'English', 'After Po is tapped to become the Spiritual Leader of the Valley of Peace, he needs to find and train a new Dragon Warrior, while a wicked sorceress plans to re-summon all the master villains whom Po has vanquished to the spirit realm.', '2024', 70.00, 'https://www.youtube.com/embed/_inKs4eeHiI', 'https://www.imdb.com/title/tt21692408', 'https://www.themoviedb.org/movie/1011985-kung-fu-panda-4', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/kDp1vUBnMpe8ak4rjgl3cLELqjU.jpg', 1, '2025-07-14 01:47:01'),
+(19, 'Avatar: Fire and Ash', 'Action, Adventure, Fantasy', 7.5, 'English', 'Jake and Neytiri\'s family grapples with grief after Neteyam\'s death, encountering a new, aggressive Na\'vi tribe, the Ash People, who are led by the fiery Varang, as the conflict on Pandora escalates and a new moral focus emerges.', '2025', 150.00, 'https://www.youtube.com/embed/nb_fFj_0rq8', 'https://www.imdb.com/title/tt1757678', 'https://www.themoviedb.org/movie/83533', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/cf7hE1ifY4UNbS25tGnaTyyDrI2.jpg', 1, '2025-08-03 13:41:21'),
+(20, 'Avengers: Endgame', 'Action, Adventure, Sci-Fi', 8.4, 'English, Japanese, Xhosa, German', 'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.', '2019', 150.00, 'https://www.youtube.com/embed/TcMBFSGVi1c', 'https://www.imdb.com/title/tt4154796', 'https://www.themoviedb.org/movie/299534', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg', 1, '2025-08-03 13:45:03'),
+(22, 'Barbie', 'Adventure, Comedy, Fantasy', 6.8, 'English, Spanish', 'Barbie and Ken are having the time of their lives in the seemingly perfect world of Barbie Land. However, when they get a chance to go to the outside world, they soon discover the joys and perils of living among regular humans.', '2023', 200.00, 'https://www.youtube.com/embed/pBk4NYhWNMM', 'https://www.imdb.com/title/tt1517268', 'https://www.themoviedb.org/movie/346698', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg', 1, '2025-08-03 13:49:00'),
+(23, 'Oppenheimer', 'Biography, Drama, History', 8.3, 'English, German, Italian, Dutch', 'A dramatization of the life story of J. Robert Oppenheimer, the physicist who had a large hand in the development of the atomic bombs that brought an end to World War II.', '2023', 202.00, 'https://www.youtube.com/embed/uYPbbksJxIg', 'https://www.imdb.com/title/tt15398776', 'https://www.themoviedb.org/movie/872585', 'https://iframe.mediadelivery.net/embed/473368/c1b642ac-6c59-42b9-982d-40309f0a07c6', 'https://image.tmdb.org/t/p/original/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg', 1, '2025-08-03 15:26:04');
 
 -- --------------------------------------------------------
 
@@ -150,7 +175,8 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `phone_number`, `password_h
 (5, 'fahad', 'fahad@gmail.com', '01711223399', '$2y$10$Jb0qO7hVwuokgwsQ8lIg7eyopKF0zeQBRAs44GDiFRwcGKLN604pO', 2, '2025-07-14 04:48:11'),
 (6, 'fahad2', 'fahad2@gmail.com', '01711223398', '$2y$10$Am8E7gzIQ9tAVzUWTNFFouwhP1gLoZdZcEnX9bXNjxTR6UyQbSPeW', 2, '2025-07-14 04:50:18'),
 (7, 'siam', 'siam@gmail.com', '01712345678', '$2y$10$Y1xob76Q25oT5Rk2VW4tgO7dpw5Ke2iHwqy0diOaotoKuponLO0KK', 2, '2025-07-14 04:51:27'),
-(8, 'ridwan', 'ridwan@gmail.com', '01912457889', '$2y$10$tgdJXopKfXzK/ETpMmERrOkhM0vnuY5WuHnSOG4Qce9mYEuQHLu1a', 2, '2025-07-14 04:54:21');
+(8, 'ridwan', 'ridwan@gmail.com', '01912457889', '$2y$10$tgdJXopKfXzK/ETpMmERrOkhM0vnuY5WuHnSOG4Qce9mYEuQHLu1a', 2, '2025-07-14 04:54:21'),
+(9, 'nihalxx1@byom.de', 'nihalxx1@byom.de', '01665565656', '$2y$10$3QsmPflLXC1RqfKj5VgkNOfslPNYniFnSxTcrdUOwmIhbz8GmO39i', 1, '2025-08-03 16:22:05');
 
 -- --------------------------------------------------------
 
@@ -169,6 +195,12 @@ CREATE TABLE `watch_history` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`);
 
 --
 -- Indexes for table `movies`
@@ -230,10 +262,16 @@ ALTER TABLE `watch_history`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `purchases`
@@ -263,7 +301,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `watch_history`
