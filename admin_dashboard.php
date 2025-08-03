@@ -86,7 +86,7 @@ include 'connection.php';
       <div class="section mb-5">
         <h4 class="fw-semibold mb-3">Quick Actions</h4>
         <div class="d-flex flex-wrap gap-3">
-          <a href="/movie_management.php"
+          <a href="./movie_management.php"
             ><button class="btn btn-purple">Update Movies</button></a
           >
           <a href="/admin_user_management.php"

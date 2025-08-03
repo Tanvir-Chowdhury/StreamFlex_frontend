@@ -1,52 +1,40 @@
 <?php
 include 'connection.php';
-
-//  form submission add movie
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = mysqli_real_escape_string($conn, $_POST['title']);
-    $genre = mysqli_real_escape_string($conn, $_POST['genre']);
-    $rating = (float)$_POST['rating'];
-    $language = mysqli_real_escape_string($conn, $_POST['language']);
-    $description = mysqli_real_escape_string($conn, $_POST['description']);
-    $release_year = (int)$_POST['release_year'];
-    $price = (float)$_POST['price'];
-    $trailer_url = mysqli_real_escape_string($conn, $_POST['trailer_url']);
-    $imdb_url = mysqli_real_escape_string($conn, $_POST['imdb_url']);
-    $tmdb_url = mysqli_real_escape_string($conn, $_POST['tmdb_url']);
-    $movie_file_url = mysqli_real_escape_string($conn, $_POST['movie_file_url']);
-    $poster_image_url = mysqli_real_escape_string($conn, $_POST['poster_image_url']);
-    $uploaded_by = 1; // Assuming the admin ID is 1
-
-    $query = "INSERT INTO movies (title, genre, rating, language, description, release_year, price, trailer_url, imdb_url, tmdb_url, movie_file_url, poster_image_url, uploaded_by) 
-              VALUES ('$title', '$genre', $rating, '$language', '$description', $release_year, $price, '$trailer_url', '$imdb_url', '$tmdb_url', '$movie_file_url', '$poster_image_url', $uploaded_by)";
-
-    if (mysqli_query($conn, $query)) {
-        echo "<p>Movie added successfully!</p>";
-    } else {
-        echo "<p>Error adding movie: " . mysqli_error($conn) . "</p>";
-    }
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Add Movie - StreamFlex</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="preload" as="stylesheet" />
-  <link rel="preload" as="stylesheet" href="css/navbar.css" />
-  <link rel="preload" as="stylesheet" href="css/brand.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/brand.css" />
 </head>
 <body style="background-color: var(--bg-primary); color: var(--text-primary)">
-  <!-- Navbar -->
   <?php require 'navbar.php'; ?>
 
-  <!-- Add Movie Form -->
   <main class="container" style="padding-top: 100px">
     <h2 class="mb-4 fw-bold">Add New Movie</h2>
 
-    <form action="add_movie.php" method="POST">
+    <!-- Search Form -->
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <input type="text" id="searchTitle" class="form-control" placeholder="Movie Title (e.g. Jawan)" />
+      </div>
+      <div class="col-md-3">
+        <input type="number" id="searchYear" class="form-control" placeholder="Year (e.g. 2023)" />
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-secondary w-100" onclick="searchMovies()">Search via OMDb</button>
+      </div>
+    </div>
+
+    <!-- OMDb Search Results -->
+    <div id="searchResults" class="mb-4"></div>
+
+    <!-- Movie Form -->
+    <form action="upload_movie.php" method="POST" id="movieForm">
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input type="text" class="form-control" id="title" name="title" required />
@@ -56,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" class="form-control" id="genre" name="genre" required />
       </div>
       <div class="mb-3">
-        <label for="rating" class="form-label">Rating</label>
+        <label for="rating" class="form-label">Rating (IMDb)</label>
         <input type="number" class="form-control" id="rating" name="rating" step="0.1" required />
       </div>
       <div class="mb-3">
@@ -100,9 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
   </main>
 
-  <!-- Footer -->
   <?php require 'footer.php'; ?>
-
+  <script src="js/add_movie.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
 </html>

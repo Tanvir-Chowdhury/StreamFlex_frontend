@@ -31,11 +31,11 @@ if (isset($_GET['movie_id'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StreamFlex - Movie Details</title>
 
-  <link rel="preload" as="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" />
-  <link rel="preload" as="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-  <link rel="preload" as="stylesheet" href="css/brand.css" />
-  <link rel="preload" as="stylesheet" href="css/navbar.css" />
-  <link rel="preload" as="stylesheet" href="css/movie_details.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="css/brand.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/movie_details.css" />
 </head>
 
 <body style="background-color: var(--bg-primary); color: var(--text-primary)">
