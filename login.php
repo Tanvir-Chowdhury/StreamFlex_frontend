@@ -10,7 +10,7 @@ if (isset($_COOKIE['remember_me']) && !isset($_SESSION['user_id'])) {
         $simulated_db_selector = 'a1b2c3d4e5f6';
         $simulated_db_hashed_validator = hash('sha256', 'z9y8x7w6v5u4');
         $simulated_user_id = 1;
-        $simulated_expiry_date = time() + (86400 * 30); // 30 days from now
+        $simulated_expiry_date = time() + (86400 * 30); 
 
         if ($selector === $simulated_db_selector && hash_equals($simulated_db_hashed_validator, hash('sha256', $validator))) {
             $_SESSION['user_id'] = $simulated_user_id;

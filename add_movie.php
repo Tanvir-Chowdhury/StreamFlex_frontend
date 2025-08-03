@@ -1,6 +1,4 @@
-<?php
-include 'connection.php';
-?>
+<?php include 'connection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,6 +87,22 @@ include 'connection.php';
   </main>
 
   <?php require 'footer.php'; ?>
+
+  <!-- Load and inject API keys before using -->
+  <script>
+    let OMDB_API_KEY = "";
+    let TMDB_API_KEY = "";
+
+    async function loadApiKeys() {
+      const res = await fetch("api/get_api_keys.php");
+      const keys = await res.json();
+      OMDB_API_KEY = keys.omdb;
+      TMDB_API_KEY = keys.tmdb;
+    }
+
+    loadApiKeys();
+  </script>
+
   <script src="js/add_movie.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>

@@ -15,6 +15,13 @@ $subtotal = isset($_POST['subtotal']) ? floatval($_POST['subtotal']) : 0;
 $taxes    = isset($_POST['taxes'])    ? floatval($_POST['taxes'])    : 0;
 $total    = isset($_POST['total'])    ? floatval($_POST['total'])    : 0;
 
+$user_id = $_SESSION['user_id'] ;
+$stmt_user = $conn->prepare("SELECT username, email, phone_number FROM users WHERE user_id = ?");
+$stmt_user->bind_param("i", $user_id);
+$stmt_user->execute();
+$result_user = $stmt_user->get_result();
+$user = $result_user->fetch_assoc();
+
 $_SESSION['total'] = $total; 
 $_SESSION['name'] = $user['username'];
 $_SESSION['email'] = $user['email'];
@@ -93,10 +100,10 @@ document.getElementById("pay-now-btn").addEventListener("click", function () {
     body: JSON.stringify({
       amount: amount,
       currency: 'BDT',
-      cus_name: $_SESSION['name'],
-      cus_email: $_SESSION['email'],
+      cus_name: <?php echo "{$_SESSION['name']}"; ?>,
+      cus_email: <?php echo "{$_SESSION['email']}"; ?>,
       cus_add1: 'Dhaka',
-      cus_phone: $_SESSION['phone_number']
+      cus_phone: <?php echo "{$_SESSION['phone_number']}"; ?>
     })
   })
   .then(response => response.json())

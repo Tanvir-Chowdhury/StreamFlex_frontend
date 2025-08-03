@@ -65,8 +65,8 @@ $user_id = $_SESSION['user_id'] ?? null;
 
         <div class="d-flex gap-3">
           <a href="<?php 
-          if($_SESSION["role_id"] == 1){
-            echo 'watch_movie.php?movie_id=5';
+          if (!isset($_SESSION['user_id'])) {
+              echo 'movie_details.php?movie_id=5';
           }
           else{
             if($user_id) {

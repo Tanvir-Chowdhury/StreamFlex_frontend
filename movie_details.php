@@ -1,5 +1,8 @@
 <?php
+session_start();
 include 'connection.php';
+$user_id = $_SESSION['user_id'] ?? null;
+$role_id = $_SESSION['role_id'] ?? null;
 
 if (isset($_GET['movie_id'])) {
   $movieId = intval($_GET['movie_id']);
@@ -75,13 +78,22 @@ if (isset($_GET['movie_id'])) {
     </div>
 
     <div class="action-buttons d-flex gap-3 flex-wrap mb-5">
-      <?php if ($_SESSION["role_id"] == 1) {
-        echo '<a
+      <?php if (!isset($_SESSION['user_id'])){
+        echo '<a href="add_to_cart.php?movie_id='.$movie['movie_id'].'" class="btn btn-outline-light px-4 py-2">
+        <i class="bi bi-cart-plus me-2"></i>Add to Cart
+      </a>
+
+      <a href="./subscription.php"><button class="btn btn-secondary px-4 py-2">
+          <i class="bi bi-box-arrow-in-down me-2"></i>Subscribe to Watch
+        </button></a>';
+      } else {
+        if ($role_id == 1) {
+          echo '<a
           href="watch_movie.php?movie_id=' . $movie['movie_id'] . '"
           class="btn btn-light text-dark fw-semibold px-4 py-2"
           ><i class="bi bi-play-fill me-2"></i>Watch Movie</a
-        >';
-      } else {
+        >';}
+        else {
         if ($user_id) {
           include 'connection.php';
           $stmt = $conn->prepare("SELECT * FROM purchases WHERE user_id = ? AND movie_id = ?");
@@ -109,7 +121,7 @@ if (isset($_GET['movie_id'])) {
         } else {
           echo 'login.php';
         }
-      } ?>
+      }}?>
     </div>
 
     <!-- Footer -->

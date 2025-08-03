@@ -1,5 +1,4 @@
-const OMDB_API_KEY = "2a56a024";
-const TMDB_API_KEY = "e8e25c55d23a14daef9053b0206bb804";
+// Keys are now defined in the HTML by PHP, not in JS file
 
 async function searchMovies() {
   const title = document.getElementById("searchTitle").value.trim();
@@ -37,9 +36,9 @@ async function selectMovie(imdbID) {
   // Fill form
   document.getElementById("title").value = movie.Title || "";
   document.getElementById("genre").value = movie.Genre || "";
-  document.getElementById("rating").value = 
-    movie.imdbRating !== "N/A" && !isNaN(parseFloat(movie.imdbRating)) 
-    ? parseFloat(movie.imdbRating) 
+  document.getElementById("rating").value =
+    movie.imdbRating !== "N/A" && !isNaN(parseFloat(movie.imdbRating))
+    ? parseFloat(movie.imdbRating)
     : "";
   document.getElementById("language").value = movie.Language || "";
   document.getElementById("description").value = movie.Plot || "";
@@ -59,6 +58,5 @@ async function selectMovie(imdbID) {
     alert("TMDB poster not found.");
   }
 
-  // Scroll to form
   document.getElementById("movieForm").scrollIntoView({ behavior: "smooth" });
 }
