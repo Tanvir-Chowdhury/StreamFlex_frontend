@@ -6,17 +6,17 @@
     <title>Subscription - StreamFlex</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
+      rel="preload" as="stylesheet"
     />
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-      rel="stylesheet"
+      rel="preload" as="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/brand.css" />
-    <link rel="stylesheet" href="css/series.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="preload" as="stylesheet" href="css/brand.css" />
+    <link rel="preload" as="stylesheet" href="css/series.css" />
+    <link rel="preload" as="stylesheet" href="css/navbar.css" />
   </head>
   <body>
     <!-- Navbar -->
@@ -182,6 +182,6 @@
 
     <!-- Footer -->
     <?php require 'footer.php'; ?>
-    <script src="js/subscription.js"></script>
+    <script src="js/subscription.js" defer></script>
   </body>
 </html>

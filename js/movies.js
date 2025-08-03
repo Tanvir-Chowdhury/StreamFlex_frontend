@@ -7,7 +7,7 @@ function renderMovies(list) {
     container.innerHTML += `
       <div class="movie-card">
         <div class="card-image-container">
-          <img src="${m.poster_image_url}" alt="${m.title}" class="card-img-top" />
+          <img src="${m.poster_image_url}" alt="${m.title}" class="card-img-top" loading="lazy"/>
           <div class="image-overlay">
             <div class="overlay-buttons d-flex">
               <a href = "movie_details.php?movie_id=${m.movie_id}"><button class="overlay-btn"><i class="bi bi-play-circle-fill"></i></button></a>

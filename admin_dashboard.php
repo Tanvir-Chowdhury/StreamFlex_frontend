@@ -86,25 +86,30 @@ include 'connection.php';
       <div class="section mb-5">
         <h4 class="fw-semibold mb-3">Quick Actions</h4>
         <div class="d-flex flex-wrap gap-3">
-          <a href="/project/movie_management.php"
+          <a href="/movie_management.php"
             ><button class="btn btn-purple">Update Movies</button></a
           >
-          <a href="/project/admin_user_management.php"
+          <a href="/admin_user_management.php"
             ><button class="btn btn-outline-light">View Users</button></a
           >
-          <a href="./transactions.html"
+          <a href="/transactions.html"
             ><button class="btn btn-outline-light">
               View All Purchases
             </button></a
           >
         </div>
+        <div class="text-end mb-4">
+      <a href="logout.php" class="btn btn-outline-danger">
+        <i class="bi bi-box-arrow-right me-1"></i> Logout
+      </a>
+    </div>
       </div>
     </main>
 
     <!-- Footer -->
     <?php require 'footer.php'; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/admin_dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/admin_dashboard.js" defer></script>
   </body>
 </html>

@@ -6,15 +6,15 @@
     <title>Contact Support | StreamFlex</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
+      rel="preload" as="stylesheet"
     />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-      rel="stylesheet"
+      rel="preload" as="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/brand.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="preload" as="stylesheet" href="css/brand.css" />
+    <link rel="preload" as="stylesheet" href="css/navbar.css" />
   </head>
   <body
     style="background-color: var(--bg-primary); color: var(--text-secondary)"
@@ -289,8 +289,8 @@
     <!-- Footer -->
     <?php require 'footer.php'; ?>  
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script defer>
       document
         .getElementById("contactForm")
         .addEventListener("submit", function (e) {

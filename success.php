@@ -34,7 +34,7 @@ $deleteCart->execute();
 unset($_SESSION['cart_movie_ids']);
 unset($_SESSION['total']);
 
-echo "<h2 style='color: green;'>✅ Payment Successful!</h2>";
+echo "<h2 style='color: green;'>Payment Successful!</h2>";
 echo "<p>Thank you for your purchase. Transaction ID: <strong>$txn_id</strong></p>";
 echo "<a href='user_dashboard.php'>Go to Dashboard</a>";
 ?>

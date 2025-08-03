@@ -47,11 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
 
                 if ($stmt->execute()) {
-                                echo "<p style='color: green;'>✅ Movie uploaded successfully.</p>";
+                                echo "<p style='color: green;'>Movie uploaded successfully.</p>";
                                 header("Location: admin/movie_management.php");
 exit;
                 } else {
-                                echo "<p style='color: red;'>❌ Error: " . $stmt->error . "</p>";
+                                echo "<p style='color: red;'>Error: " . $stmt->error . "</p>";
                 }
 } else {
                 echo "<p style='color: orange;'>Please submit the form first.</p>";

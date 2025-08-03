@@ -34,9 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Add Movie - StreamFlex</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/navbar.css" />
-  <link rel="stylesheet" href="css/brand.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="preload" as="stylesheet" />
+  <link rel="preload" as="stylesheet" href="css/navbar.css" />
+  <link rel="preload" as="stylesheet" href="css/brand.css" />
 </head>
 <body style="background-color: var(--bg-primary); color: var(--text-primary)">
   <!-- Navbar -->
@@ -103,6 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- Footer -->
   <?php require 'footer.php'; ?>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
 </html>

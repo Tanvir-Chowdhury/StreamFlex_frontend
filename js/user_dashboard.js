@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   container.innerHTML = history.map(movie => `
     <div class="movie-card">
       <div class="card-image-container">
-        <img src="${movie.image}" class="card-img-top" alt="${movie.title}" />
+        <img src="${movie.image}" class="card-img-top" alt="${movie.title}" loading="lazy"/>
       </div>
       <div class="card-body p-3">
         <h4 class="card-title">${movie.title}</h4>

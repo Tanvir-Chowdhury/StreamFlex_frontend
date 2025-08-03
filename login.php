@@ -42,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['role_id'] = $user['role_id'];
 
             if ($remember_me) {
                 $selector = bin2hex(random_bytes(16));
@@ -51,9 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 setcookie('remember_me', $selector . ':' . $validator, $expires, '/', '', false, true); 
             }
-
-            header('Location: user_dashboard.php');
-            exit();
+            if ($user['role_id'] == 1) {
+              header('Location: admin_dashboard.php');
+              exit();
+            }
+            else{
+              header('Location: user_dashboard.php');
+              exit();
+            }
         } else {
             $login_error = 'Invalid email/phone or password. Please try again.';
         }
@@ -70,10 +76,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - StreamFlex</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/brand.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="preload" as="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="preload" as="stylesheet" href="css/style.css" />
+    <link rel="preload" as="stylesheet" href="css/brand.css" />
+    <link rel="preload" as="stylesheet" href="css/navbar.css" />
     <style>
         .error-message {
             color: #dc3545;
@@ -150,6 +156,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </main>
     <?php require 'footer.php'; ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

@@ -51,7 +51,7 @@
                     }
 
                     $stmt->close();
-                    $conn->close();
+                    // $conn->close();
                 }
                 ?>
 
@@ -116,8 +116,16 @@
     </div>
 </nav>
 
-<script src="js/navbar.js"></script>
-<script>
+<script src="js/navbar.js" defer></script>
+<script defer>
     const movies = <?php echo $javascript_movie_array; ?>;
     const movieTitles = movies.map(movie => movie.title);
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then(reg => console.log("Service Worker registered"))
+    .catch(err => console.error("Service Worker error:", err));
+}
 </script>

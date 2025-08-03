@@ -1,7 +1,10 @@
 
 <?php
-
+session_start();
 include 'connection.php';
+
+$user_id = $_SESSION['user_id'] ?? null;
+
 
 ?>
 
@@ -16,12 +19,12 @@ include 'connection.php';
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
 
-  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="preload" as="stylesheet" href="css/navbar.css" />
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="preload" as="stylesheet" />
 
-  <link rel="stylesheet" href="css/brand.css" />
-  <link rel="stylesheet" href="css/index.css" />
+  <link rel="preload" as="stylesheet" href="css/brand.css" />
+  <link rel="preload" as="stylesheet" href="css/index.css" />
 </head>
 
 <body style="background-color: var(--bg-primary)">
@@ -61,14 +64,37 @@ include 'connection.php';
         </div>
 
         <div class="d-flex gap-3">
-          <a href="watch_movie.php?movie_id=5" class="btn btn-light text-dark fw-semibold px-4 py-2 d-flex align-items-center gap-2">
+          <a href="<?php 
+          if($_SESSION["role_id"] == 1){
+            echo 'watch_movie.php?movie_id=5';
+          }
+          else{
+            if($user_id) {
+              include 'connection.php';
+              $stmt = $conn->prepare("SELECT * FROM purchases WHERE user_id = ? AND movie_id = ?");
+              $stmt->bind_param("ii", $user_id, $movie_id);
+              $stmt->execute();
+              $result = $stmt->get_result();
+
+              if ($result->num_rows > 0){
+                echo 'watch_movie.php?movie_id=5';
+              }
+              else{
+                echo 'movie_details.php?movie_id=5';
+              }
+
+              $stmt->close();
+            } else{
+              echo 'login.php';
+            }
+          } ?>" class="btn btn-light text-dark fw-semibold px-4 py-2 d-flex align-items-center gap-2">
             <i class="bi bi-play-fill"></i> Play Now
           </a>
           <a href="movie_details.php?movie_id=5"
             class="btn btn-secondary bg-opacity-75 text-white fw-semibold px-4 py-2 d-flex align-items-center gap-2">
             <i class="bi bi-info-circle"></i> More Info
           </a>
-        </div>
+        </div> 
       </div>
     </div>
   </section>
@@ -217,11 +243,11 @@ include 'connection.php';
   <!-- Footer -->
   <?php require 'footer.php'; ?>
 
-  <script src="js/index.js"></script>
+  <script src="js/index.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-    crossorigin="anonymous"></script>
-    <script>
+    crossorigin="anonymous" defer></script>
+    <script defer>
   const movies = <?php echo $javascript_movie_array; ?>;
   const movieTitles = movies.map(movie => movie.title);
 </script> 

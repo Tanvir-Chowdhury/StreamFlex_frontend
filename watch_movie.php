@@ -27,11 +27,11 @@ if (isset($_GET['movie_id'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Watch Movie - StreamFlex</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="css/brand.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
-   <!--<link rel="stylesheet" href="css/watch_movie.css" />-->
+    <link rel="preload" as="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" />
+    <link rel="preload" as="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="preload" as="stylesheet" href="css/brand.css" />
+    <link rel="preload" as="stylesheet" href="css/navbar.css" />
+   <!--<link rel="preload" as="stylesheet" href="css/watch_movie.css" />-->
 </head>
 <body style="background-color: var(--bg-primary); color: var(--text-primary)">
     <!-- Navbar -->
@@ -65,7 +65,7 @@ if (isset($_GET['movie_id'])) {
     <!-- Footer -->
     <?php require 'footer.php'; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <!--<script src="js/watch_movie.js"></script> age lagto ekhn dorkar nai ejonno comment out, moved to different JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!--<script src="js/watch_movie.js" defer></script> age lagto ekhn dorkar nai ejonno comment out, moved to different JS -->
 </body>
 </html>

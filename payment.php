@@ -1,4 +1,12 @@
 <?php
+session_start();
+include 'connection.php';
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: cart.php');
     exit();
@@ -8,6 +16,9 @@ $taxes    = isset($_POST['taxes'])    ? floatval($_POST['taxes'])    : 0;
 $total    = isset($_POST['total'])    ? floatval($_POST['total'])    : 0;
 
 $_SESSION['total'] = $total; 
+$_SESSION['name'] = $user['username'];
+$_SESSION['email'] = $user['email'];
+$_SESSION['phone_number'] = $user['phone_number'];
 ?>
 
 <!DOCTYPE html>
@@ -16,12 +27,12 @@ $_SESSION['total'] = $total;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payment - StreamFlex</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/payment.css" />
-  <link rel="stylesheet" href="css/brand.css" />
-  <link rel="stylesheet" href="css/navbar.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="preload" as="stylesheet"/>
+  <link rel="preload" as="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="preload" as="stylesheet" href="css/style.css" />
+  <link rel="preload" as="stylesheet" href="css/payment.css" />
+  <link rel="preload" as="stylesheet" href="css/brand.css" />
+  <link rel="preload" as="stylesheet" href="css/navbar.css" />
 </head>
 <body style="padding-top: 70px; background-color: var(--bg-primary); color: var(--text-primary);">
 
@@ -70,7 +81,7 @@ $_SESSION['total'] = $total;
 
 <?php include 'footer.php'; ?>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 
 <script>
 document.getElementById("pay-now-btn").addEventListener("click", function () {
@@ -82,10 +93,10 @@ document.getElementById("pay-now-btn").addEventListener("click", function () {
     body: JSON.stringify({
       amount: amount,
       currency: 'BDT',
-      cus_name: 'Test Customer',
-      cus_email: 'test@example.com',
+      cus_name: $_SESSION['name'],
+      cus_email: $_SESSION['email'],
       cus_add1: 'Dhaka',
-      cus_phone: '01711111111'
+      cus_phone: $_SESSION['phone_number']
     })
   })
   .then(response => response.json())
@@ -93,7 +104,7 @@ document.getElementById("pay-now-btn").addEventListener("click", function () {
     if (data.GatewayPageURL) {
       window.location.href = data.GatewayPageURL;
     } else {
-      alert('❌ Failed to initiate payment');
+      alert('Failed to initiate payment');
     }
   })
   .catch(error => {
