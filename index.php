@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include 'connection.php';
@@ -29,8 +28,8 @@ $user_id = $_SESSION['user_id'] ?? null;
 
 <body style="background-color: var(--bg-primary)">
   <!-- Navbar -->
-   <?php require 'navbar.php';?>
-  
+  <?php require 'navbar.php'; ?>
+
 
   <!-- Hero Section -->
   <section class="position-relative min-vh-100 h-auto py-5 d-flex align-items-center text-white overflow-hidden">
@@ -64,37 +63,35 @@ $user_id = $_SESSION['user_id'] ?? null;
         </div>
 
         <div class="d-flex gap-3">
-          <a href="<?php 
-          if (!isset($_SESSION['user_id'])) {
-              echo 'movie_details.php?movie_id=5';
-          }
-          else{
-            if($user_id) {
-              include 'connection.php';
-              $stmt = $conn->prepare("SELECT * FROM purchases WHERE user_id = ? AND movie_id = ?");
-              $stmt->bind_param("ii", $user_id, $movie_id);
-              $stmt->execute();
-              $result = $stmt->get_result();
+          <a href="<?php
+                    if (!isset($_SESSION['user_id'])) {
+                      echo 'movie_details.php?movie_id=5';
+                    } else {
+                      if ($user_id) {
+                        include 'connection.php';
+                        $stmt = $conn->prepare("SELECT * FROM purchases WHERE user_id = ? AND movie_id = ?");
+                        $stmt->bind_param("ii", $user_id, $movie_id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
 
-              if ($result->num_rows > 0){
-                echo 'watch_movie.php?movie_id=5';
-              }
-              else{
-                echo 'movie_details.php?movie_id=5';
-              }
+                        if ($result->num_rows > 0) {
+                          echo 'watch_movie.php?movie_id=5';
+                        } else {
+                          echo 'movie_details.php?movie_id=5';
+                        }
 
-              $stmt->close();
-            } else{
-              echo 'login.php';
-            }
-          } ?>" class="btn btn-light text-dark fw-semibold px-4 py-2 d-flex align-items-center gap-2">
+                        $stmt->close();
+                      } else {
+                        echo 'login.php';
+                      }
+                    } ?>" class="btn btn-light text-dark fw-semibold px-4 py-2 d-flex align-items-center gap-2">
             <i class="bi bi-play-fill"></i> Play Now
           </a>
           <a href="movie_details.php?movie_id=5"
             class="btn btn-secondary bg-opacity-75 text-white fw-semibold px-4 py-2 d-flex align-items-center gap-2">
             <i class="bi bi-info-circle"></i> More Info
           </a>
-        </div> 
+        </div>
       </div>
     </div>
   </section>
@@ -105,19 +102,18 @@ $user_id = $_SESSION['user_id'] ?? null;
       <h2 class="fw-bold text-sm-center pb-2">Trending Movies</h2>
     </div>
 
-      <div class="movie-wrapper">
-        <div class="movie-container" id="movieList"></div>
-      </div>
+    <div class="movie-wrapper">
+      <div class="movie-container" id="movieList"></div>
+    </div>
 
-      <div class="text-center mt-4 mb-4">
-        <button
-          id="loadMoreBtn"
-          class="btn btn-outline-light"
-          onclick="loadMore()"
-        >
-          Load More
-        </button>
-      </div>
+    <div class="text-center mt-4 mb-4">
+      <button
+        id="loadMoreBtn"
+        class="btn btn-outline-light"
+        onclick="loadMore()">
+        Load More
+      </button>
+    </div>
   </div>
 
   <!-- Pricing -->
@@ -189,10 +185,9 @@ $user_id = $_SESSION['user_id'] ?? null;
                   </div>
                 </div>
                 <ul class="list mt-3 mb-4 text-start">
-                  <li>Full HD Quality</li>
+                  <li>FHD Quality</li>
                   <li>4 Devices</li>
                   <li>Full Library</li>
-                  <li>All Devices</li>
                   <li>Download Offline</li>
                 </ul>
               </div>
@@ -224,7 +219,6 @@ $user_id = $_SESSION['user_id'] ?? null;
                 <li>4K Ultra HD</li>
                 <li>6 Devices</li>
                 <li>Early Access</li>
-                <li>All Devices</li>
                 <li>Download Offline</li>
                 <li>Family Profiles</li>
               </ul>
@@ -243,14 +237,18 @@ $user_id = $_SESSION['user_id'] ?? null;
   <!-- Footer -->
   <?php require 'footer.php'; ?>
 
+  <?php if (isset($javascript_movie_array)) : ?>
+    <script>
+      window.movies = <?php echo $javascript_movie_array; ?>;
+    </script>
+    <script src="js/movies.js" defer></script>
+  <?php endif; ?>
+
   <script src="js/index.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
     crossorigin="anonymous" defer></script>
-    <script defer>
-  const movies = <?php echo $javascript_movie_array; ?>;
-  const movieTitles = movies.map(movie => movie.title);
-</script> 
+
 </body>
 
 </html>

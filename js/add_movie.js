@@ -44,6 +44,7 @@ async function selectMovie(imdbID) {
   document.getElementById("description").value = movie.Plot || "";
   document.getElementById("release_year").value = movie.Year || "";
   document.getElementById("imdb_url").value = `https://www.imdb.com/title/${imdbID}`;
+  document.getElementById("trailer_url").value = "https://www.youtube.com/embed/";
 
   // TMDB poster fetch
   const tmdbRes = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(movie.Title)}&year=${movie.Year}`);

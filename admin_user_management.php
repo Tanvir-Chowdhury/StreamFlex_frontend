@@ -42,9 +42,9 @@ if ($result->num_rows > 0) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/css/navbar.css" />
-  <link rel="stylesheet" href="/css/index.css" />
-  <link rel="stylesheet" href="/css/brand.css" />
+  <link rel="stylesheet" href="./css/navbar.css" />
+  <link rel="stylesheet" href="./css/index.css" />
+  <link rel="stylesheet" href="./css/brand.css" />
 </head>
 
 <body style="background-color: var(--bg-primary); color: white">
@@ -59,14 +59,9 @@ if ($result->num_rows > 0) {
     <!-- Filters -->
     <div class="d-flex gap-2 mb-4 flex-wrap">
       <select class="form-select bg-dark text-white" style="width: 200px">
-        <option selected>All Movies</option>
-        <option value="1">Avatar</option>
-        <option value="2">Titanic</option>
-      </select>
-      <select class="form-select bg-dark text-white" style="width: 200px">
-        <option selected>All Subscriptions</option>
-        <option value="1">Subscribed</option>
-        <option value="2">Free</option>
+        <option selected>All Roles</option>
+        <option value="1">Admin</option>
+        <option value="2">Normal user</option>
       </select>
       <button class="btn btn-outline-light">Search</button>
     </div>

@@ -64,6 +64,6 @@ if (isset($_GET['movie_id'])) {
     <?php require 'footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" defer></script>
-    <!--<script src="js/watch_movie.js" defer></script> age lagto ekhn dorkar nai ejonno comment out, moved to different JS -->
+    <!--<script src="js/watch_movies.js" defer></script> age lagto ekhn dorkar nai ejonno comment out, moved to different JS -->
 </body>
 </html>

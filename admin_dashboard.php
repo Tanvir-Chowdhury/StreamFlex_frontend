@@ -1,10 +1,46 @@
 
 <?php
-
 include 'connection.php';
 
+// Get user count
+$userCount = 0;
+$sqlUser = "SELECT COUNT(*) as cnt FROM users";
+if ($resultUser = $conn->query($sqlUser)) {
+    $rowUser = $resultUser->fetch_assoc();
+    $userCount = $rowUser['cnt'];
+    $resultUser->free();
+}
 
+// Get subscriber count (assuming role_id 3 = subscribeduser)
+$subscriberCount = 0;
+$sqlSub = "SELECT COUNT(*) as cnt FROM users WHERE role_id = 3";
+if ($resultSub = $conn->query($sqlSub)) {
+    $rowSub = $resultSub->fetch_assoc();
+    $subscriberCount = $rowSub['cnt'];
+    $resultSub->free();
+}
 
+// Get purchase count
+$purchaseCount = 0;
+$sqlPurchase = "SELECT COUNT(*) as cnt FROM purchases";
+if ($resultPurchase = $conn->query($sqlPurchase)) {
+    $rowPurchase = $resultPurchase->fetch_assoc();
+    $purchaseCount = $rowPurchase['cnt'];
+    $resultPurchase->free();
+}
+
+// Get 3 most recent movies
+$recentMovies = [];
+$sqlRecent = "SELECT movie_id, title, genre, release_year, poster_image_url FROM movies ORDER BY created_at DESC LIMIT 3";
+if ($resultRecent = $conn->query($sqlRecent)) {
+    while ($row = $resultRecent->fetch_assoc()) {
+        $recentMovies[] = $row;
+    }
+    $resultRecent->free();
+}
+
+// Optionally, close the connection at the end of the file
+// $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -55,32 +91,35 @@ include 'connection.php';
         </div>
       </div>
 
-      <!-- Recently Uploaded -->
-      <div class="section mb-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="fw-semibold">Recently Uploaded Movies</h4>
-        </div>
-        <div class="d-flex gap-3 flex-wrap">
-          <div class="movie-card">
-            <img src="images/avatar.jpg" alt="Avatar" class="movie-thumb" />
-            <div class="movie-meta">Avatar<br /><span>2009 · Action</span></div>
+<!-- Recently Uploaded -->
+<div class="section mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-semibold">Recently Uploaded Movies</h4>
+  </div>
+  <div class="d-flex gap-3 flex-wrap">
+    <?php if (count($recentMovies) > 0): ?>
+      <?php foreach ($recentMovies as $row): ?>
+        <?php
+          $movie_id = (int)$row['movie_id'];
+          $title = htmlspecialchars($row['title']);
+          $year = htmlspecialchars($row['release_year']);
+          $genre = htmlspecialchars($row['genre']);
+          $poster = htmlspecialchars($row['poster_image_url'] ?: "images/default-movie.jpg");
+        ?>
+        <a href="movie_details.php?movie_id=<?= $movie_id ?>" style="text-decoration: none; color: inherit;">
+          <div class="movie-card" style="cursor: pointer;">
+            <img src="<?= $poster ?>" alt="<?= $title ?>" class="movie-thumb" />
+            <div class="movie-meta"><?= $title ?><br /><span><?= $year ?> · <?= $genre ?></span></div>
           </div>
-          <div class="movie-card">
-            <img src="images/matrix.jpg" alt="Matrix" class="movie-thumb" />
-            <div class="movie-meta">Matrix<br /><span>1999 · Crime</span></div>
-          </div>
-          <div class="movie-card">
-            <img
-              src="images/titanic.jpg"
-              alt="Titanic"
-              class="movie-thumb"
-            />
-            <div class="movie-meta">
-              Titanic<br /><span>1997 · Sci-Fi</span>
-            </div>
-          </div>
-        </div>
-      </div>
+        </a>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <div>No recently uploaded movies found.</div>
+    <?php endif; ?>
+  </div>
+</div>
+
+
 
       <!-- Quick Actions -->
       <div class="section mb-5">
@@ -89,10 +128,10 @@ include 'connection.php';
           <a href="./movie_management.php"
             ><button class="btn btn-purple">Update Movies</button></a
           >
-          <a href="/admin_user_management.php"
+          <a href="./admin_user_management.php"
             ><button class="btn btn-outline-light">View Users</button></a
           >
-          <a href="/transactions.html"
+          <a href="./transactions.html"
             ><button class="btn btn-outline-light">
               View All Purchases
             </button></a

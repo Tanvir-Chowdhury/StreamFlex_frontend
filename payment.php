@@ -91,8 +91,34 @@ $_SESSION['phone_number'] = $user['phone_number'];
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 
 <script>
-document.getElementById("pay-now-btn").addEventListener("click", function () {
-  const amount = <?php echo json_encode($total); ?>;
+  const dbName = "StreamFlexSessionDB";
+  const storeName = "sessionData";
+
+  function saveSessionToIndexedDB(data) {
+    const request = indexedDB.open(dbName, 1);
+
+    request.onupgradeneeded = function (event) {
+      const db = event.target.result;
+      db.createObjectStore(storeName, { keyPath: "key" });
+    };
+
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+      const tx = db.transaction(storeName, "readwrite");
+      const store = tx.objectStore(storeName);
+
+      store.put({ key: "user_id", value: <?php echo json_encode($_SESSION['user_id']); ?> });
+      store.put({ key: "cart_movie_ids", value: <?php echo json_encode($_SESSION['cart_movie_ids'] ?? []); ?> });
+      store.put({ key: "total", value: <?php echo json_encode($_SESSION['total']); ?> });
+
+      tx.oncomplete = () => db.close();
+    };
+  }
+
+
+  document.getElementById("pay-now-btn").addEventListener("click", () => {
+    saveSessionToIndexedDB(); 
+    const amount = <?php echo json_encode($total); ?>;
 
   fetch('ssl_payment.php', {
     method: 'POST',
@@ -100,10 +126,10 @@ document.getElementById("pay-now-btn").addEventListener("click", function () {
     body: JSON.stringify({
       amount: amount,
       currency: 'BDT',
-      cus_name: <?php echo "{$_SESSION['name']}"; ?>,
-      cus_email: <?php echo "{$_SESSION['email']}"; ?>,
+      cus_name: "<?php echo "{$_SESSION['name']}"; ?>",
+      cus_email: "<?php echo "{$_SESSION['email']}"; ?>",
       cus_add1: 'Dhaka',
-      cus_phone: <?php echo "{$_SESSION['phone_number']}"; ?>
+      cus_phone: "<?php echo "{$_SESSION['phone_number']}"; ?>"
     })
   })
   .then(response => response.json())
@@ -118,6 +144,7 @@ document.getElementById("pay-now-btn").addEventListener("click", function () {
     console.error('Payment initiation error:', error);
   });
 });
+
 </script>
 
 </body>

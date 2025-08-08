@@ -1,5 +1,4 @@
 <?php
-// ssl_payment.php
 header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents('php://input'), true);
@@ -10,9 +9,9 @@ $post_data = [
   'total_amount' => $data['amount'],
   'currency' => $data['currency'],
   'tran_id' => uniqid('INV_'),
-  'success_url' => 'http://streamflex.xyz/success.php',
-  'fail_url' => 'http://streamflex.xyz/fail.php',
-  'cancel_url' => 'http://streamflex.xyz/cancel.php',
+  'success_url' => 'https://streamflex.xyz/success.php',
+  'fail_url' => 'https://streamflex.xyz/fail.php',
+  'cancel_url' => 'https://streamflex.xyz/cancel.php',
   'cus_name' => $data['cus_name'],
   'cus_email' => $data['cus_email'],
   'cus_add1' => $data['cus_add1'],
