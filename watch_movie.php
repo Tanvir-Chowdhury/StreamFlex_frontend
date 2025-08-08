@@ -1,4 +1,13 @@
 <?php
+session_start(); // Always start the session at the very top!
+
+// Redirect to login if not logged in
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+
 include 'connection.php';
 
 if (isset($_GET['movie_id'])) {
