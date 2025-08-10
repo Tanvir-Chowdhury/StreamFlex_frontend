@@ -1,40 +1,43 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const history = [
-    {
-      title: "Avatar",
-      image: "images/avatar.jpg",
-      genre: "Action",
-      rating: "8.7",
-      duration: "2h 42m",
-      price: "50 Tk",
-    },
-    {
-      title: "Black Phone 2",
-      image: "images/blackphones2.jpg",
-      genre: "Drama",
-      rating: "7.8",
-      duration: "1h 43m",
-      price: "30 Tk",
-    }
-  ];
 
-  const container = document.getElementById("watchHistory");
-  container.innerHTML = history.map(movie => `
-    <div class="movie-card">
-      <div class="card-image-container">
-        <img src="${movie.image}" class="card-img-top" alt="${movie.title}" loading="lazy"/>
-      </div>
-      <div class="card-body p-3">
-        <h4 class="card-title">${movie.title}</h4>
-        <div class="card-meta d-flex justify-content-between text-muted">
-          <span>${movie.genre}</span>
-          <span><i class="bi bi-star-fill"></i> ${movie.rating}</span>
+
+
+let visibleCount = 8;
+
+function renderMovies(list) {
+  const container = document.getElementById("movieList");
+  container.innerHTML = "";
+  list.slice(0, visibleCount).forEach((m) => {
+    container.innerHTML += `
+      <div class="movie-card">
+        <div class="card-image-container">
+          <img src="${m.poster_image_url}" alt="${m.title}" class="card-img-top" loading="lazy" />
+          <div class="image-overlay">
+            <div class="overlay-buttons d-flex">
+              <a href="movie_details.php?movie_id=${m.movie_id}"><button class="overlay-btn"><i class="bi bi-play-circle-fill"></i></button></a>
+              <button class="overlay-btn"><i class="bi bi-bookmark-plus-fill"></i></button>
+            </div>
+          </div>
         </div>
-        <div class="card-meta d-flex justify-content-between text-muted">
-          <span><i class="bi bi-clock"></i> ${movie.duration}</span>
-          <span style="color: var(--brand-purple)" class="price">${movie.price}</span>
+        <div class="card-body">
+          <div><a href = "movie_details.php?movie_id=${m.movie_id}"><h3 class="card-title">${m.title}</h3></a></div>
+          <div style="height: 100%;">
+            <div class="card-meta">
+              <span>${m.genre}</span>
+              <span class="rating"><i class="bi bi-star-fill"></i>${m.rating}</span>
+            </div>
+            <div class="card-meta">
+              <span><i class="bi bi-calendar"></i>${m.release_year}</span>
+              <span style="color: var(--brand-purple)" class="price">${m.price} Tk</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  `).join("");
-});
+      </div>`;
+  });
+}
+
+function loadMore() {
+  visibleCount += 4;
+  renderMovies(movies2);
+}
+
+window.onload = () => renderMovies(movies2);

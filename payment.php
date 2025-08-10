@@ -15,6 +15,13 @@ $subtotal = isset($_POST['subtotal']) ? floatval($_POST['subtotal']) : 0;
 $taxes    = isset($_POST['taxes'])    ? floatval($_POST['taxes'])    : 0;
 $total    = isset($_POST['total'])    ? floatval($_POST['total'])    : 0;
 
+$user_id = $_SESSION['user_id'] ;
+$stmt_user = $conn->prepare("SELECT username, email, phone_number FROM users WHERE user_id = ?");
+$stmt_user->bind_param("i", $user_id);
+$stmt_user->execute();
+$result_user = $stmt_user->get_result();
+$user = $result_user->fetch_assoc();
+
 $_SESSION['total'] = $total; 
 $_SESSION['name'] = $user['username'];
 $_SESSION['email'] = $user['email'];
@@ -27,12 +34,12 @@ $_SESSION['phone_number'] = $user['phone_number'];
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payment - StreamFlex</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="preload" as="stylesheet"/>
-  <link rel="preload" as="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
-  <link rel="preload" as="stylesheet" href="css/style.css" />
-  <link rel="preload" as="stylesheet" href="css/payment.css" />
-  <link rel="preload" as="stylesheet" href="css/brand.css" />
-  <link rel="preload" as="stylesheet" href="css/navbar.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/payment.css" />
+  <link rel="stylesheet" href="css/brand.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
 </head>
 <body style="padding-top: 70px; background-color: var(--bg-primary); color: var(--text-primary);">
 
@@ -84,8 +91,34 @@ $_SESSION['phone_number'] = $user['phone_number'];
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 
 <script>
-document.getElementById("pay-now-btn").addEventListener("click", function () {
-  const amount = <?php echo json_encode($total); ?>;
+  const dbName = "StreamFlexSessionDB";
+  const storeName = "sessionData";
+
+  function saveSessionToIndexedDB(data) {
+    const request = indexedDB.open(dbName, 1);
+
+    request.onupgradeneeded = function (event) {
+      const db = event.target.result;
+      db.createObjectStore(storeName, { keyPath: "key" });
+    };
+
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+      const tx = db.transaction(storeName, "readwrite");
+      const store = tx.objectStore(storeName);
+
+      store.put({ key: "user_id", value: <?php echo json_encode($_SESSION['user_id']); ?> });
+      store.put({ key: "cart_movie_ids", value: <?php echo json_encode($_SESSION['cart_movie_ids'] ?? []); ?> });
+      store.put({ key: "total", value: <?php echo json_encode($_SESSION['total']); ?> });
+
+      tx.oncomplete = () => db.close();
+    };
+  }
+
+
+  document.getElementById("pay-now-btn").addEventListener("click", () => {
+    saveSessionToIndexedDB(); 
+    const amount = <?php echo json_encode($total); ?>;
 
   fetch('ssl_payment.php', {
     method: 'POST',
@@ -93,10 +126,10 @@ document.getElementById("pay-now-btn").addEventListener("click", function () {
     body: JSON.stringify({
       amount: amount,
       currency: 'BDT',
-      cus_name: $_SESSION['name'],
-      cus_email: $_SESSION['email'],
+      cus_name: "<?php echo "{$_SESSION['name']}"; ?>",
+      cus_email: "<?php echo "{$_SESSION['email']}"; ?>",
       cus_add1: 'Dhaka',
-      cus_phone: $_SESSION['phone_number']
+      cus_phone: "<?php echo "{$_SESSION['phone_number']}"; ?>"
     })
   })
   .then(response => response.json())
@@ -111,6 +144,7 @@ document.getElementById("pay-now-btn").addEventListener("click", function () {
     console.error('Payment initiation error:', error);
   });
 });
+
 </script>
 
 </body>

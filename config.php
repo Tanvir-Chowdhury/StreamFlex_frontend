@@ -1,0 +1,4 @@
+<?php
+$OMDB_API_KEY = '2a56a024';
+$TMDB_API_KEY = 'e8e25c55d23a14daef9053b0206bb804';
+$YOUTUBE_API_KEY = 'AIzaSyDKJjfHQ6SjXqjoplBZlKckNx6euSWEVxE';

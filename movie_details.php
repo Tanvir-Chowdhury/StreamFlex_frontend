@@ -1,5 +1,8 @@
 <?php
+session_start();
 include 'connection.php';
+$user_id = $_SESSION['user_id'] ?? null;
+$role_id = $_SESSION['role_id'] ?? null;
 
 if (isset($_GET['movie_id'])) {
   $movieId = intval($_GET['movie_id']);
@@ -31,11 +34,11 @@ if (isset($_GET['movie_id'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StreamFlex - Movie Details</title>
 
-  <link rel="preload" as="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" />
-  <link rel="preload" as="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-  <link rel="preload" as="stylesheet" href="css/brand.css" />
-  <link rel="preload" as="stylesheet" href="css/navbar.css" />
-  <link rel="preload" as="stylesheet" href="css/movie_details.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="css/brand.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/movie_details.css" />
 </head>
 
 <body style="background-color: var(--bg-primary); color: var(--text-primary)">
@@ -75,39 +78,51 @@ if (isset($_GET['movie_id'])) {
     </div>
 
     <div class="action-buttons d-flex gap-3 flex-wrap mb-5">
-      <?php if ($_SESSION["role_id"] == 1) {
-        echo '<a
-          href="watch_movie.php?movie_id=' . $movie['movie_id'] . '"
-          class="btn btn-light text-dark fw-semibold px-4 py-2"
-          ><i class="bi bi-play-fill me-2"></i>Watch Movie</a
-        >';
-      } else {
-        if ($user_id) {
-          include 'connection.php';
-          $stmt = $conn->prepare("SELECT * FROM purchases WHERE user_id = ? AND movie_id = ?");
-          $stmt->bind_param("ii", $user_id, $movie_id);
-          $stmt->execute();
-          $result = $stmt->get_result();
-
-          if ($result->num_rows > 0) {
-            echo '<a
-          href="watch_movie.php?movie_id=' . $movie['movie_id'] . '"
-          class="btn btn-light text-dark fw-semibold px-4 py-2"
-          ><i class="bi bi-play-fill me-2"></i>Watch Movie</a
-        >';
-          } else {
-            echo '<a href="add_to_cart.php?movie_id='.$movie['movie_id'].'" class="btn btn-outline-light px-4 py-2">
+      <?php if (!isset($_SESSION['user_id'])) {
+        echo '<a href="add_to_cart.php?movie_id=' . $movie['movie_id'] . '" class="btn btn-outline-light px-4 py-2">
         <i class="bi bi-cart-plus me-2"></i>Add to Cart
       </a>
 
       <a href="./subscription.php"><button class="btn btn-secondary px-4 py-2">
           <i class="bi bi-box-arrow-in-down me-2"></i>Subscribe to Watch
         </button></a>';
-          }
-
-          $stmt->close();
+      } else {
+        if ($role_id == 1) {
+          echo '<a
+          href="watch_movie.php?movie_id=' . $movie['movie_id'] . '"
+          class="btn btn-light text-dark fw-semibold px-4 py-2"
+          ><i class="bi bi-play-fill me-2"></i>Watch Movie</a
+        >';
         } else {
-          echo 'login.php';
+          if ($_SESSION['user_id']) {
+            include 'connection.php';
+            $user_id = $_SESSION['user_id'];
+            $movie_id = $movie['movie_id'];
+            $stmt = $conn->prepare("SELECT * FROM purchases WHERE user_id = ? AND movie_id = ?");
+            $stmt->bind_param("ii", $user_id, $movie_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+              echo '<a
+          href="watch_movie.php?movie_id=' . $movie['movie_id'] . '"
+          class="btn btn-light text-dark fw-semibold px-4 py-2"
+          ><i class="bi bi-play-fill me-2"></i>Watch Movie</a
+        >';
+            } else {
+              echo '<a href="add_to_cart.php?movie_id=' . $movie['movie_id'] . '" class="btn btn-outline-light px-4 py-2">
+        <i class="bi bi-cart-plus me-2"></i>Add to Cart
+      </a>
+
+      <a href="./subscription.php"><button class="btn btn-secondary px-4 py-2">
+          <i class="bi bi-box-arrow-in-down me-2"></i>Subscribe to Watch
+        </button></a>';
+            }
+
+            $stmt->close();
+          } else {
+            echo 'login.php';
+          }
         }
       } ?>
     </div>
